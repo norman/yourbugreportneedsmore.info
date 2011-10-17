@@ -1,0 +1,597 @@
+<html><head>
+<title>C&oacute;mo informar de fallos de forma efectiva</title>
+</head><body>
+<h2>C&oacute;mo informar de fallos de forma efectiva</h2>
+
+<p><i>por
+Simon
+Tatham, programador profesional y de software libre</i>
+
+<p>[
+<a href="/tatham/en.html">English</a>
+|
+<a href="/tatham/br.html">Portugu&ecirc;s</a>
+|
+<a href="/tatham/cn.html">&#31616;&#20307;&#20013;&#25991;</a>
+|
+<a href="/tatham/cz.html">&#268;esky</a>
+|
+<a href="/tatham/da.html">Dansk</a>
+|
+<a href="/tatham/de.html">Deutsch</a>
+|
+<b>Espa&ntilde;ol</b>
+|
+<a href="/tatham/fr.html">Fran&ccedil;ais</a>
+|
+<a href="/tatham/hu.html">Magyar</a>
+|
+<a href="/tatham/it.html">Italiano</a>
+|
+<a href="/tatham/jp.html">&#26085;&#26412;&#35486;</a>
+|
+<a href="/tatham/nl.html">Nederlands</a>
+|
+<a href="/tatham/pl.html">Polski</a>
+|
+<a href="/tatham/ru.html">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</a>
+|
+<a href="/tatham/tw.html">&#32321;&#39636;&#20013;&#25991;</a>
+]
+
+<!-- begin essay -->
+
+<a name="intro"<h3>Introducci&oacute;n</h3></a>
+
+<p>
+Cualquiera que haya escrito software para uso p&uacute;blico
+probablemente haya recibido al menos un mal informe de fallo. Informes
+que no dicen nada ("&iexcl;No funciona!"); informes que no tienen
+sentido; informes que no dan informaci&oacute;n suficiente; informes
+que dan informaci&oacute;n <em>err&oacute;nea</em>. Informes
+de problemas que acaban siendo un error del usuario; informes de
+problemas que acaban siendo un fallo del programa de un tercero;
+informes de problemas que acaban siendo fallos en la red.
+
+<p>
+Existe una raz&oacute;n por la cual el soporte t&eacute;cnico se ve
+como un empleo horrible, y esa raz&oacute;n son los malos informes
+de fallo. Sin embargo, no todos los informes de fallo son molestos:
+yo mantengo software libre, cuando no me estoy ganando la vida,
+y a veces recibo informes de fallos incre&iacute;blemente claros,
+&uacute;tiles e <em>informativos</em>.
+
+<p>
+En este ensayo intentar&eacute; dejar claro lo que hace bueno
+a un informe de fallo. Idealmente me gustar&iacute;a que todo
+el mundo se leyera este ensayo antes de informar de un fallo a
+cualquiera. Ciertamente, me gustar&iacute;a que todos los que vayan
+a informarme de fallos a <em>m&iacute;</em> se lo leyesen.
+
+<p>
+En pocas palabras, el objetivo de un informe de fallo es permitir
+al programador ver el programa fallando ante sus ojos. Puedes
+mostr&aacute;rselo en persona, o darle instrucciones cuidadas y
+detalladas de c&oacute;mo hacer que falle. Si pueden hacer que falle,
+podr&aacute;n intentar recolectar informaci&oacute;n extra hasta que
+averig&uuml;en la causa. Si no pueden hacer que falle, tendr&aacute;n
+que pedirte que t&uacute; recolectes esa informaci&oacute;n en
+su lugar.
+
+<p>
+En los informes de fallo, intenta dejar muy claro qu&eacute; son
+hechos reales ("Estaba con la computadora y ocurri&oacute; esto") y
+qu&eacute; son especulaciones ("<em>Creo</em> que esto puede ser el
+problema"). Excluye las especulaciones si quieres, pero no excluyas
+nunca los hechos.
+
+<p>
+Cuando informas de un fallo, lo haces porque quieres que el
+fallo se arregle. No tiene sentido blasfemar al programador o
+ser deliberadamente in&uacute;til: puede que sea culpa suya que
+t&uacute; tengas el problema, y puede que tengas raz&oacute;n al
+estar enfadado con ellos, pero el fallo se arreglar&aacute; antes si
+les ayudas proporcion&aacute;ndoles toda la informaci&oacute;n que
+necesitan. Recuerda tambi&eacute;n que si el programa es gratuito,
+entonces el autor lo proporciona amablemente, de modo que si mucha
+gente fuera ruda con ellos quiz&aacute;s deban dejar de sentirse
+amables.
+</p>
+
+<a name="respect"><h3>"No funciona."</h3></a>
+
+<p>
+Dale al programador algo de cr&eacute;dito en cuanto a inteligencia
+b&aacute;sica: si el programa no funcionase en absoluto, se
+hubieran dado cuenta. Si no se han dado cuenta, es que en su caso
+funciona. Por tanto, o bien est&aacute;s haciendo algo diferente de
+lo que ellos hacen, o tu entorno es diferente del suyo. Necesitan
+informaci&oacute;n; proporcionar esa informaci&oacute;n es el objetivo
+de un informe de fallo. M&aacute;s informaci&oacute;n casi siempre
+es mejor que menos.
+
+<p>
+Muchos programas, particularmente programas gratuitos, publican
+una lista de fallos conocidos. Si puedes encontrar una lista de
+fallos conocidos, merece la pena leerla para ver si el fallo que
+acabas de encontrar ya es conocido o no. Si lo es, probablemente no
+merezca la pena informar de &eacute;l nuevamente, pero si piensas
+que tienes m&aacute;s informaci&oacute;n que la que aparece en el
+informe de fallo, puede que quieras contactar con el programador de
+todos modos. Puede que sean capaces de arreglar el fallo m&aacute;s
+f&aacute;cilmente si les das informaci&oacute;n que todav&iacute;a
+no ten&iacute;an.
+
+<p>
+Este ensayo est&aacute; lleno de consejos. Ninguno de ellos es una
+regla absoluta. Programadores concretos tienen formas concretas en las
+que les gusta que se les informe de fallos. Si el programa viene con su
+propio conjunto de consejos para informar de fallos, l&eacute;elos. Si
+los consejos que vienen con el programa contradicen los consejos
+presentes en este ensayo, &iexcl;sigue los que vienen con el programa!
+
+<p>
+Si no est&aacute;s informando de un fallo sino simplemente pidiendo
+ayuda para utilizar el programa, deber&iacute;as indicar en qu&eacute;
+otros sitios has buscado ya la respuesta a tu pregunta. ("Mir&eacute;
+el cap&iacute;tulo 4 y la secci&oacute;n 5.2 de la ayuda pero
+no encontr&eacute; nada que me dijera si esto es posible.") Esto
+permitir&aacute; que el programador sepa d&oacute;nde espera la
+gente encontrar la respuesta, de forma que pueden hacer que la
+documentaci&oacute;n sea m&aacute;s f&aacute;cil de usar.
+</p>
+
+<a name="showme"><h3>"Mu&eacute;strame."</h3></a>
+
+<p>
+Una de las mejores maneras de informar de un fallo es mostrarlo
+al programador. Sit&uacute;alos delante de tu ordenador, lanza
+su software, y demuestra aquello que funciona mal. Deja que miren
+c&oacute;mo arrancas la m&aacute;quina, que miren c&oacute;mo ejecutas
+el software, que miren c&oacute;mo interact&uacute;as con el software
+y que miren lo que el software realiza como respuesta a tus entradas.
+
+<p>
+Conocen su software como la palma de su mano. Saben en qu&eacute;
+partes confiar, y saben qu&eacute; partes pueden tener m&aacute;s
+fallos. Saben intuitivamente lo que tienen que buscar. Cuando el
+software haya hecho algo obviamente err&oacute;neo, puede que hayan
+reparado en algo anterior <em>sutilmente</em> err&oacute;neo que
+pueda darles una pista. Pueden observar todo lo que el computador
+hace durante la ejecuci&oacute;n de prueba, y pueden decidir lo que
+es importante por s&iacute; mismos.
+
+<p>
+Quiz&aacute;s esto no sea suficiente. Quiz&aacute;s decidan que
+necesitan m&aacute;s informaci&oacute;n, y te pidan que les muestres
+lo mismo una vez m&aacute;s. Puede que te pidan que les gu&iacute;es
+en el proceso, de forma que puedan reproducir el fallo por s&iacute;
+mismos todas las veces que sean necesarias. Puede que intenten
+variar el proceso algunas veces m&aacute;s, y as&iacute; conocer si
+el problema ocurre s&oacute;lo en un caso o en una familia de casos
+relacionados. Si no tienes suerte, quiz&aacute;s necesiten sentarse
+durante un par de horas con un conjunto de herramientas de desarrollo y
+empezar a investigar <em>de verdad</em>. Pero lo m&aacute;s importante
+es que el programador est&eacute; mirando el computador cuando algo
+falla. Una vez que puedan ver el problema, normalmente podr&aacute;n
+seguir solos a partir de ese punto para intentar arreglarlo.
+</p>
+
+<a name="showmehow"><h3>"Ens&eacute;&ntilde;ame a mostrar por m&iacute;
+mismo."</h3></a>
+
+<p>
+&Eacute;sta es la era de Internet. Es la era de las comunicaciones
+globales. Es la era en la que puedo enviar mi software a alguien
+de Rusia pulsando un bot&oacute;n, y &eacute;l puede enviarme sus
+comentarios de forma igualmente sencilla. Pero si tiene un problema
+con mi programa, <em>no puede</em> hacer que yo est&eacute; presente
+cuando falla. "Mu&eacute;strame" es bueno cuando puedes, pero muchas
+veces no puedes.
+
+<p>
+Si tienes que informar de un fallo a un programador que no puede estar
+presente personalmente, el objetivo del ejercicio es hacer que sean
+capaces de <em>reproducir</em> el problema. Quieres que el programador
+ejecute su propia copia del programa, haga lo mismo que t&uacute;, y
+haga que falle de la misma manera. Cuando no pueden ver que el problema
+ocurre delante de sus ojos, no pueden hacer nada con &eacute;l.
+
+<p>
+As&iacute; que diles exactamente lo que hiciste. Si es un programa
+gr&aacute;fico, diles qu&eacute; botones pulsaste y en qu&eacute;
+orden los pulsaste. Si es un programa que se ejecuta escribiendo una
+orden, m&uacute;estrales de forma precisa la orden que usaste. Cuando
+sea posible, debes proporcionar una transcripci&oacute;n de la
+sesi&oacute;n, mostrando las &oacute;rdenes que tecleaste y lo que
+la computadora mostr&oacute; como respuesta.
+
+<p>
+Dale al programador toda la informaci&oacute;n que se te ocurra. Si
+el programa lee de un fichero, probablemente necesites enviarles
+una copia del fichero. Si el programa habla con otro computador
+a trav&eacute;s de una red, probablemente no puedas enviarles una
+copia de ese computador, pero puedes al menos decir qu&eacute; clase
+de computador es y, si es posible, qu&eacute; software ejecuta.
+</p>
+
+<a name="describe"><h3>"A m&iacute; me funciona. &iquest;Qu&eacute;
+est&aacute; mal?"</h3></a>
+
+<p>
+Si le das a un programador una larga lista de entradas y acciones
+y ellos lanzan su propia copia del programa y no ocurre nada
+malo, entonces es que no les has dado informaci&oacute;n
+suficiente. Posiblemente el fallo no ocurre en todos los
+computadores; tu sistema y su sistema puede diferir de alg&uacute;n
+modo. Quiz&aacute;s hayas malentendido lo que el programa supuestamente
+hace, y ambos est&aacute;is mirando exactamente la misma pantalla y
+t&uacute; piensas que est&aacute; mal y ellos saben que est&aacute;
+bien.
+
+<p>
+As&iacute; que describe tambi&eacute;n lo que ocurri&oacute;. Diles
+exactamente lo que viste. Diles por qu&eacute; piensas que lo que viste
+est&aacute; mal; a&uacute;n mejor, diles exactamente lo que t&uacute;
+esperabas ver. Si dices "y entonces fall&oacute;", est&aacute;s
+dejando fuera informaci&oacute;n muy importante.
+
+<p>
+Si viste mensajes de error entonces dile al programador, de forma clara
+y precisa, cu&aacute;les eran. &iexcl;<em>Son</em> importantes! En
+este momento, el programador no est&aacute; intentando arreglar el
+problema: s&oacute;lo est&aacute;n intentando encontrarlo. Necesitan
+saber qu&eacute; ha ido mal, y esos mensajes de error son el mayor
+esfuerzo del computador para dec&iacute;rtelo. Anota los errores
+si no tienes otra forma m&aacute;s sencilla de recordarlos, pero no
+merece la pena informar de que el programa gener&oacute; un error a
+menos que puedas indicar cu&aacute;l era el mensaje de error.
+
+<p>
+En particular, si el mensaje de error contiene n&uacute;meros,
+<em>aseg&uacute;rate</em> de informar de ellos al programador. Aunque
+t&uacute; no puedas encontrarles sentido no significa que no lo
+tengan. Los n&uacute;meros contienen toda clase de informaci&oacute;n
+que puede ser le&iacute;da por un programador, y probablemente
+contengan pistas vitales. Los n&uacute;meros en los mensajes de error
+est&aacute;n ah&iacute; porque el computador est&aacute; demasiado
+confundido como para informar del fallo con palabras, pero est&aacute;
+intentando hacerlo lo mejor posible para darte la informaci&oacute;n
+importante.
+
+<p>
+En este punto, el programador est&aacute; a efectos pr&aacute;cticos
+realizando el trabajo de un detective. No saben lo que ha ocurrido,
+y no pueden estar lo bastante cerca como para verlo por ellos mismos,
+as&iacute; que est&aacute;n intentando encontrar pistas que les
+hagan ver el problema. Los mensajes de error, las incomprensibles
+cadenas de n&uacute;meros, e incluso los retardos inesperados son
+todos tan importantes como las huellas dactilares en la escena de un
+crimen. &iexcl;Gu&aacute;rdalos!
+
+<p>
+Si usas Unix, el programa puede producir un volcado de memoria. Los
+volcados de memoria son una fuente de pistas particularmente buena,
+as&iacute; que no los elimines. Por otra parte, a la mayor&iacute;a
+de programadores no les gusta recibir ficheros gigantes por correo
+electr&oacute;nico sin una advertencia, as&iacute; que pregunta antes
+de enviar un volcado a nadie. Tambi&eacute;n, ten en cuenta que los
+volcados de memoria contienen un registro del estado completo del
+programa: cualquier "secreto" presente (quiz&aacute;s el programa
+estuviera manejando un mensaje personal, o trabajando con datos
+confidenciales) puede aparecer en el fichero del volcado.
+</p>
+
+<a name="antelope"><h3>"Y entonces intent&eacute;..."</h3></a>
+
+<p>
+Hay un mont&oacute;n de cosas que puedes hacer cuando aparece un
+fallo o un error. Muchas de esas cosas empeoran el problema. Una
+amiga m&iacute;a en la escuela borr&oacute; accidentalmente
+todos sus documentos de Word, y antes de pedir ayuda a un experto
+intent&oacute; reinstalar el Word y luego ejecutar el desfragmentador
+de disco. Ninguna de esas acciones ayud&oacute; a recuperar sus
+ficheros, y gracias a ambas el disco se dispers&oacute; de tal manera
+que ning&uacute;n programa de recuperaci&oacute;n hubiese podido
+hacer nada. Si no hubiese tocado nada, puede que hubiera tenido
+una oportunidad.
+
+<p>
+Usuarios como &eacute;ste son como una mangosta atrapada en una
+esquina: con su espalda contra la pared y viendo la muerte inminente
+ante sus ojos, ataca salvajemente, porque hacer algo tiene que ser
+mejor que no hacer nada. Esto no se adapta bien al tipo de problemas
+que producen los computadores.
+
+<p>
+En lugar de ser una mangosta, s&eacute; un ant&iacute;lope. Cuando un
+ant&iacute;lope se enfrenta a algo inesperado o terror&iacute;fico,
+se para. Permanece completamente parado e intenta no atraer la
+atenci&oacute;n, mientras se detiene a pensar y calcular qu&eacute;
+es lo mejor que puede hacer. (Si los ant&iacute;lopes tuvieran
+una l&iacute;nea de atenci&oacute;n t&eacute;cnica, probablemente
+llamar&iacute;an a ella en ese momento.) Entonces, una vez que ha
+decidido qu&eacute; es lo m&aacute;s seguro que puede hacer, lo hace.
+
+<p>
+Cuando algo va mal, inmediatamente deja de hacer <em>nada</em>. No
+toques ning&uacute;n bot&oacute;n en absoluto. Mira la pantalla e
+intenta encontrar cosas fuera de lo normal, y recu&eacute;rdalo o
+an&oacute;talo. Entonces quiz&aacute;s empieza cautelosamente a pulsar
+"Aceptar" o "Cancelar", lo que te parezca m&aacute;s seguro. Intenta
+desarrollar un reflejo - si el computador hace algo inesperado,
+detente.
+
+<p>
+Si logras salir del problema, bien cerrando el programa afectado o bien
+reiniciando la computadora, ser&iacute;a bueno intentar hacer que el
+problema ocurra de nuevo. A los programadores les gustan los problemas
+que pueden reproducir m&aacute;s de una vez. Los programadores felices
+arreglan los fallos antes y de forma m&aacute;s eficiente.
+</p>
+
+<a name="symptoms"><h3>"Creo que el modulador de taquiones tiene la
+polarizaci&oacute;n incorrecta."</h3></a>
+
+<p>
+No s&oacute;lo son los no-programadores los que producen malos
+informes de fallos. Algunos de los peores informes de fallos que he
+visto vienen de programadores, e incluso de buenos programadores.
+
+<p>
+Una vez trabaj&eacute; con otro programador que no paraba de encontrar
+fallos en su c&oacute;digo e intentaba arreglarlos. De vez en cuando
+encontraba un fallo que no era capaz de arreglar, y me llamaba para que
+le ayudase. "&iquest;Qu&eacute; ha pasado?", le preguntaba. &Eacute;l
+me respond&iacute;a dici&eacute;ndome su opini&oacute;n sobre lo que
+necesitaba repararse.
+
+<p>
+Esto funcionaba bien cuando su opini&oacute;n era correcta. Significaba
+que ya hab&iacute;a hecho la mitad del trabajo y as&iacute;
+pod&iacute;amos terminarlo los dos juntos. Era eficiente y &uacute;til.
+
+<p>
+Sin embargo, muchas veces se equivocaba. Trabaj&aacute;bamos un tiempo
+intentando averiguar por qu&eacute; una cierta parte del programa
+produc&iacute;a datos incorrectos, y eventualmente descubr&iacute;amos
+que no los produc&iacute;a, y que hab&iacute;amos estado media hora
+investigando un trozo de c&oacute;digo que funcionaba perfectamente,
+y que el problema estaba en otra parte.
+
+<p>
+Estoy seguro de que t&uacute; no har&iacute;as eso con un
+doctor. "Doctor, necesito que me prescriba hidroyoyodina." La
+gente sabe que no debe hacer eso con un doctor: le describes los
+s&iacute;ntomas, las molestias y achaques y dolores y erupciones y
+fiebres, y dejas que el doctor haga el diagn&oacute;stico del problema
+y decida qu&eacute; hacer al respecto. En otro caso el doctor te
+tomar&aacute; por hipocondriaco y lun&aacute;tico, y con raz&oacute;n.
+
+<p>
+Ocurre lo mismo con los programadores. Proporcionar tu propio
+diagn&oacute;stico puede que a veces sea &uacute;til, pero
+siempre establece los s&iacute;ntomas. El diagn&oacute;stico
+es un extra opcional, y no una alternativa a describir los
+s&iacute;ntomas. Igualmente, enviar modificaciones del c&oacute;digo
+para arreglar el problema es un suplemento &uacute;til en un informe
+de fallo, pero no un sustituto adecuado para el mismo.
+
+<p>
+Si un programador te pide informaci&oacute;n extra, &iexcl;no te
+la inventes! Una vez alguien me inform&oacute; de un fallo, y le
+ped&iacute; que ejecutara una cierta orden que yo sab&iacute;a que
+fallar&iacute;a. Le ped&iacute; que lo probase porque quer&iacute;a
+saber cu&aacute;l de dos errores posibles surgir&iacute;a. Conocer
+cu&aacute;l era una pista vital. Pero no lo intent&oacute; - sino
+que me respondi&oacute; diciendo "No, eso no va a funcionar". Me
+llev&oacute; un tiempo persuadirle de que lo intentara de verdad.
+
+<p>
+Usar tu inteligencia para ayudar al programador est&aacute;
+bien. Incluso si tus deducciones son incorrectas, el
+programador deber&iacute;a estar agradecido de que al menos hayas
+<em>intentado</em> hacerle la vida m&aacute;s f&aacute;cil. Pero
+informa de los s&iacute;ntomas tambi&eacute;n, o quiz&aacute;s se
+la compliques.
+</p>
+
+<a name="intermittent"><h3>"Vaya, lo hac&iacute;a hace un
+momento."</h3></a>
+
+<p>
+Dile "fallo intermitente" a un programador y f&iacute;jate la cara
+que ponen. Los problemas f&aacute;ciles son aquellos en los que la
+realizaci&oacute;n de una secuencia simple de acciones hacen que surja
+el problema. El programador puede repetir esa secuencia de acciones en
+un entorno de pruebas cerrado y observable y ver lo que ocurre con gran
+detalle. Demasiados problemas no funcionan as&iacute;: habr&aacute;
+programas que fallar&aacute;n una vez a la semana, o una vez cada
+mucho tiempo, o nunca fallar&aacute;n cuando los pruebes delante del
+programador pero s&iacute; cuando una fecha l&iacute;mite est&aacute;
+a la vuelta de la esquina.
+
+<p>
+La mayor&iacute;a de los fallos intermitentes no son verdaderamente
+intermitentes. La mayor&iacute;a de ellos tienen alguna l&oacute;gica
+en alguna parte. Algunos pueden ocurrir cuando la m&aacute;quina se
+est&aacute; quedando sin memoria, otros pueden ocurrir cuando otro
+programa intenta modificar un fichero cr&iacute;tico en el momento
+equivocado, y algunos pueden ocurrir &iexcl;s&oacute;lo en la primera
+media hora de cada hora! (Una vez vi uno de &eacute;stos).
+
+<p>
+Tambi&eacute;n, si puedes reproducir el fallo pero el programador no
+puede, podr&iacute;a ser porque tu computador y su computador son
+diferentes en algo y ese algo es lo que provoca el fallo. Una vez
+tuve un programa cuya ventana se enrollaba en una peque&ntilde;a
+bola en la esquina de la pantalla, se quedaba ah&iacute; y <em>se
+enfurru&ntilde;aba</em>. Pero s&oacute;lo hac&iacute;a eso en pantallas
+de 800x600; en mi pantalla de 1024x768 estaba bien.
+
+<p>
+El programador querr&aacute; saber todo lo que puedas
+contarle del problema. Pru&eacute;balo en otra m&aacute;quina,
+quiz&aacute;s. Pru&eacute;balo dos o tres veces y mira la frecuencia
+con la que falla. Si falla cuando est&aacute;s trabajando en
+algo serio pero no cuando est&aacute;s intentando demostrarlo,
+puede que sean los tiempos grandes de ejecuci&oacute;n o ficheros
+grandes lo que lo hagan fallar. Intenta recordar todos los detalles
+que puedas acerca de lo que estabas haciendo cuando el programa
+fall&oacute;, y si encontraste alg&uacute;n tipo de patr&oacute;n,
+menci&oacute;nalo. Cualquier informaci&oacute;n que puedas
+proporcionar ser&aacute; &uacute;til. Incluso si es s&oacute;lo
+probabil&iacute;stica (como "falla con m&aacute;s frecuencia si estoy
+ejecutando el Emacs"), puede que no proporcione pistas directas acerca
+de la causa del problema, pero puede que ayude al programador a la
+hora de reproducirlo.
+
+<p>
+M&aacute;s importante, el programador querr&aacute; estar seguro de si
+es un aut&eacute;ntico fallo intermitente o un fallo espec&iacute;fico
+de esa m&aacute;quina. Querr&aacute;n conocer un mont&oacute;n de
+detalles acerca de tu computador, para intentar saber c&oacute;mo
+difiere del suyo. Muchos de esos detalles depender&aacute;n del
+programa en particular, pero algo que deber&iacute;as estar listo
+para proporcionar son los n&uacute;meros de versi&oacute;n. El
+n&uacute;mero de versi&oacute;n del propio programa, el n&uacute;mero
+de versi&oacute;n del sistema operativo, y probablemente de cualquier
+otro programa que intervenga en el problema.
+</p>
+
+<a name="clarity"><h3>"Entonces cargu&eacute; el disco en
+Windows..."</h3></a>
+
+<p>
+Escribir de forma clara es esencial en un informe de fallo. Si el
+programador no puede entenderte, quiz&aacute;s sea mejor no decir nada.
+
+<p>
+Recibo informes de fallos de muchas partes del mundo. Muchos de ellos
+de personas que no hablan ingl&eacute;s nativamente, y muchos de
+esos se disculpan por su pobre nivel de ingl&eacute;s. En general,
+los informes con disculpas por el pobre nivel de ingl&eacute;s son
+en realidad muy claros y &uacute;tiles. La mayor&iacute;a de informes
+confusos provienen de hablantes nativos de ingl&eacute;s que suponen
+que les entender&eacute; aunque no hagan ning&uacute;n esfuerzo por
+ser claros o precisos.
+</p>
+
+<ul>
+<li>
+<em>S&eacute; espec&iacute;fico</em>. Si puedes hacer lo mismo de
+dos maneras, di cu&aacute;l usaste. "Seleccion&eacute; Cargar" puede
+significar "Puls&eacute; sobre Cargar" o "Puls&eacute; Alt+L". Di
+cu&aacute;l usaste. A veces importa.
+
+<li>
+<em>Se prolijo</em>. Da m&aacute;s informaci&oacute;n en lugar
+de menos. Si dices muchas cosas, el programador puede ignorar
+parte de ellas. Si dices pocas, tienen que hacerte m&aacute;s
+preguntas. Una vez recib&iacute; un informe de fallo de una sola
+frase; cada vez que preguntaba m&aacute;s informaci&oacute;n, el
+informador respond&iacute;a con otra frase suelta. Me llev&oacute;
+varias semanas obtener un volumen de informaci&oacute;n &uacute;til,
+porque respond&iacute;a con una frase corta de cada vez.
+
+<li>
+<em>Ten cuidado con los pronombres y los verbos sin sujeto</em>. No
+uses referencias como "la ventana", cuando no est&aacute;
+claro lo que significa. Considera el siguiente ejemplo:
+"Lanc&eacute; la Aplicaci&oacute;nCualquiera. Apareci&oacute;
+una ventana con una advertencia. Intent&eacute; cerrarla y
+casc&oacute;." No est&aacute; claro lo que el usuario intent&oacute;
+cerrar. &iquest;Intent&oacute; cerrar la ventana de advertencia o la
+ventana de Aplicaci&oacute;nCualquiera? Hay una diferencia. En lugar de
+eso, podr&iacute;a decir "Lanc&eacute; la Aplicaci&oacute;nCualquiera,
+la cual mostr&oacute; una ventana de advertencia. Intent&eacute;
+cerrar la ventana de advertencia y Aplicaci&oacute;nCualquiera
+casc&oacute;." Esto es m&aacute;s largo y repetitivo, pero es
+m&aacute;s claro y m&aacute;s dif&iacute;cil de malinterpretar.
+
+<li>
+<em>Lee lo que has escrito</em>. L&eacute;ete el informe a ti mismo
+e intenta ver si <em>t&uacute;</em> crees que es claro. Si listas
+una secuencia de acciones a realizar para provocar el fallo, intenta
+seguirlas t&uacute; mismo para comprobar si has omitido alg&uacute;n
+paso.
+</ul>
+
+<a name="summary"><h3>Resumen</h3></a>
+
+<ul>
+
+<li>
+El primer objetivo de un informe de fallo es permitir que el
+programador vea el fallo por s&iacute; mismo. Si no puedes hacer que
+el programa falle delante de ellos, dale instrucciones detalladas
+para que ellos mismos puedan hacer que falle.
+
+<li>
+Si esto no surte efecto, y el programador <em>no puede</em> verlo
+fallar por s&iacute; mismo, el segundo objetivo del informe de fallo
+es describir lo que fall&oacute;. Describe todo en detalle. Describe
+lo que viste, y lo que esperabas ver. Toma nota de los mensajes de
+error, <em>especialmente</em> cuando contengan n&uacute;meros.
+
+<li>
+Cuando el computador haga algo inesperado, <em>detente</em>. No hagas
+nada hasta que est&eacute;s tranquilo, y no hagas nada que creas que
+es peligroso.
+
+<li>
+Por todos los medios, intenta diagnosticar el problema t&uacute;
+mismo si crees que puedes, pero si lo haces, informa tambi&eacute;n
+de los s&iacute;ntomas igualmente.
+
+<li>
+Prep&aacute;rate para proporcionar informaci&oacute;n extra si el
+programador la necesita. Si no la necesitasen no preguntar&iacute;an
+por ella. No es que est&eacute;n siendo retorcidos. Ten los
+n&uacute;meros de versi&oacute;n preparados, porque probablemente
+har&aacute;n falta.
+
+<li>
+Escribe de manera clara. Di lo que quieres decir, y aseg&uacute;rate
+de que no se puede malinterpretar.
+
+<li>
+Por encima de todo, <em>s&eacute; preciso</em>. A los programadores
+les gusta la precisi&oacute;n.
+
+</ul>
+
+<!-- end essay -->
+
+<hr>
+<p>
+<em>Advertencia:</em> nunca he visto en realidad una mangosta o un
+ant&iacute;lope. Mi zoolog&iacute;a puede ser inexacta.
+
+<p>
+<i>$Id: bugs.html 6719 2006-05-30 12:46:40Z simon $</i>
+
+<p>
+Copyright &copy; 1999 Simon Tatham.
+<br>Este documento es
+<a href="http://www.opencontent.org/">"ContenidoAbierto"</a>.
+<br>Puedes copiarlo y usar el texto bajo los t&eacute;rminos de la
+<a href="http://www.opencontent.org/opl.shtml">licencia
+OpenContent</a>.
+<div style="margin-left: 10%; margin-right: 10%; border: medium
+solid red; padding-left: 5%; padding-right: 5%">
+<p style="text-align: center; color: red">
+Este art&iacute;culo no es espec&iacute;fico de ning&uacute;n programa
+particular.
+<p style="text-align: center; color: red">
+Si has llegado a esta p&aacute;gina siguiendo un enlace desde la
+p&aacute;gina de un programa particular, NO me env&iacute;es a
+m&iacute; informes de fallo de ese programa. En su lugar, vuelve a
+la p&aacute;gina desde la que llegaste aqu&iacute; para averiguar
+d&oacute;nde enviar informes de fallo para ese programa.
+<p style="text-align: center">
+Si tienes alg&uacute;n comentario o cr&iacute;tica <em>acerca del
+propio art&iacute;culo</em>, por favor env&iacute;alos a
+<a href="mailto:anakin@pobox.com">anakin@pobox.com</a>.
+</div>
+</body></html>
