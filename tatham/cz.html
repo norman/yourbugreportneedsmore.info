@@ -1,0 +1,442 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="cs">
+<title>Jak správně hlásit chyby</title>
+</HEAD>
+<BODY>
+<h2>Jak správně hlásit chyby</h2>
+
+<p>
+Originál <a href="http://www.chiark.greenend.org.uk/~sgtatham/bugs.html">How To Report Bugs Effectively</a> (c) 1999 Simon Tatham<br>
+Překlad verze z&nbsp;1. června 2004
+
+<p>[
+<a href="/tatham/html">English</a>
+|
+<a href="/tatham/br.html">Portugu&ecirc;s</a>
+|
+<a href="/tatham/cn.html">&#31616;&#20307;&#20013;&#25991;</a>
+|
+<b>&#268;esky</b>
+|
+<a href="/tatham/da.html">Dansk</a>
+|
+<a href="/tatham/de.html">Deutsch</a>
+|
+<a href="/tatham/es.html">Espa&ntilde;ol</a>
+|
+<a href="/tatham/fr.html">Fran&ccedil;ais</a>
+|
+<a href="/tatham/hu.html">Magyar</a>
+|
+<a href="/tatham/it.html">Italiano</a>
+|
+<a href="/tatham/jp.html">&#26085;&#26412;&#35486;</a>
+|
+<a href="/tatham/nl.html">Nederlands</a>
+|
+<a href="/tatham/pl.html">Polski</a>
+|
+<a href="/tatham/ru.html">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</a>
+|
+<a href="/tatham/tw.html">&#32321;&#39636;&#20013;&#25991;</a>
+]
+
+<h3>Úvod</h3>
+
+<p>
+Každý, kdo někdy psal software, pravděpodobně dostal nějaké špatné chybové
+hlášení. Buďto nicneříkající ("Je to rozbitý!"), nebo nesmyslné,
+nebo neinformativní, nebo <em>chybné</em>. Nebo se ukáže, že je to chyba
+uživatele; nebo nějakého jiného programu; nebo nefunkční sítě.
+
+<p>
+Hlavní důvod, proč je práce v&nbsp;uživatelské podpoře tak hrozná, jsou špatná
+chybová hlášení. Nicméně ne všechna chybová hlášení jsou nepříjemná: sám vyvíjím
+software, a občas dostávám krásně čistá, jasná, informativní hlášení.
+
+<p>
+V&nbsp;tomto článku se pokusím jasně vyložit, jak hlásit chyby dobře.
+V&nbsp;ideálním případě si to přečte úplně každý ještě předtím, než někomu začne
+hlásit chyby; každopádně bych rád, aby si to přečetli ti, kteří hlásí chyby
+<em>mě</em>.
+
+<p>
+Stručně řečeno, smyslem chybového hlášení je ukázat programátorovi na vlastní
+oči, jak a kde jeho program selže. To se dá ukázat buďto osobně, nebo pomocí
+pečlivých, detailních instrukcí o tom, jak dovést program k&nbsp;chybě. Pokud se
+programátorovi podaří dovést takto program k&nbsp;chybě, pokusí se najít další
+příznaky a odhalit příčinu chyby. Pokud se mu to nepodaří, budete to za něj
+muset odhalovat vy.
+
+<p>
+Snažte se v&nbsp;chybových hlášeních rozlišit fakta ("udělal jsem tohle a
+stalo se toto") od spekulací ("myslím, že tohle je špatně").
+Spekulace můžete klidně vynechat, ale fakta vynechat nesmíte.
+
+<p>
+Když někomu hlásíte chybu, děláte to proto, že chcete, aby ji opravil. Je
+zbytečné se rozčilovat: možná, že programátor udělal chybu, tím vám způsobil
+problémy, a vy máte právo být naštvaní; ale chyba bude opravena tím rychleji,
+čím více informací programátorovi poskytnete. Pamatujte také na to, že pokud je
+program zdarma, poskytuje vám ho vlastně autor ze své dobré vůle. Pokud se na
+něj budou lidé rozčilovat, dobrá vůle ho možná přejde.
+
+<h3>"Je to rozbitý!"</h3>
+
+<p>
+Přiznejte programátorovi jistou inteligenci: kdyby ten program vůbec nefungoval,
+asi by si toho všiml. Pokud si něčeho takového nevšiml, asi mu ten program
+funguje. Čili: buď děláte něco jinak, nebo v&nbsp;jiném prostředí. To právě
+potřebuje programátor vědět; to je smyslem chybového hlášení. A více informací
+je v&nbsp;tomto případě lépe než méně.
+
+<p>
+U mnoha programů - speciálně u free software - je publikován seznam dosud
+odhalených chyb. Pokud takový seznam existuje i pro váš program, stojí za to si
+ho přečíst; třeba už se o té chybě ví. V&nbsp;tom případě nemá cenu ji hlásit
+znovu. Pokud nicméně máte další informace (oproti původnímu hlášení), můžete
+programátora kontaktovat znovu: možná bude s&nbsp;novými informacemi snazší
+chybu opravit.
+
+<p>
+Tento článek je plný takovýchto doporučení. Žádné z&nbsp;nich není absolutním
+pravidlem. Mnozí programátoři mají svůj oblíbený způsob, jak dostávat chybová
+hlášení. Pokud je k&nbsp;programu přiložen návod, jak hlásit chyby, přečtěte si
+ho. Pokud se tam tvrdí něco jiného než v&nbsp;tomto článku, řiďte se tím, co je
+uvedeno v&nbsp;návodu pro váš konkrétní program!
+
+<p>
+Pokud nehlásíte chybu, ale prostě se jen ptáte na radu, uveďte při tom, kde už
+jste hledali ("Pročetl jsem v&nbsp;dokumentaci kapitolu 4 a odstavec 5.2,
+ale nic jsem o tom nenašel."). Pak bude programátor vědět, kde lidé
+očekávají odpověď - což mu umožní vylepšit dokumentaci.
+
+<h3>"Ukaž."</h3>
+
+<p>
+Nejlepší způsob, jak ohlásit chybu, je přímo ji programátorovi ukázat. Postavte
+ho před svůj počítač, spusťte jeho program, a ukažte, kde přesně selže. Ať vidí,
+jak spouštíte počítač, jak spouštíte program, jak program používáte, jak přesně
+program reaguje na vaše příkazy.
+
+<p>
+On ten program zná jako svoje boty. Ví, kterým částem může věřit, a kde by mohly
+být chyby. Ví, na co si dát pozor. Ve chvíli, kdy program zjevně selže, už si
+třeba všimne nějaké maličkosti, která předcházela, a to mu napoví. Uvidí
+všechno, co se během vašeho testu děje, a vybere si z&nbsp;toho to podstatné.
+
+<p>
+Třeba to nebude stačit. Třeba vás požádá, ať chybu reprodukujete ještě jednou.
+Třeba vás požádá o důkladný slovní komentář, aby pak mohl chybu sám reprodukovat
+kolikrát bude chtít. Provede ten samý test s&nbsp;malými změnami a uvidí, jestli
+se program takto chová v&nbsp;tom jediném případě, nebo i při jiných
+konfiguracích. Když budete mít smůlu, bude si možná potřebovat na pár hodin
+sednout, vytáhnout nádobíčko, a důkladně se v&nbsp;tom pohrabat. Nejdůležitějsí
+ale je, že je přímo u toho, když program selže. Jakmile to jednou uvidí,
+většinou může rovnou začít pracovat na opravě.
+
+
+<h3>"Ukaž si sám.""</h3>
+
+<p>
+Žijeme v&nbsp;době internetu a globální komunikace. Stiskem klávesy mohu svůj
+software poslat známému z&nbsp;Ruska, a on mi stejně snadno pošle svůj komentář.
+Přesto ale, pokud má s&nbsp;mým programem potíže, nebudu zrovna stát u jeho
+monitoru. V&nbsp;tom případě mi chybu předvést nemůže.
+
+<p>
+Pokud nemůže být programátor osobně přítomen, musíte mu sdělit, jak chybu
+<em>reprodukovat</em>. Musí být schopen spustit svoji kopii programu, ve svém
+prostředí, postupovat stejně jako vy, a dojít ke stejné chybě. Pak ji uvidí na
+vlastní oči.
+
+<p>
+Sdělte mu tedy, co přesně jste udělali. Pokud je to grafický program, řekněte,
+které čudlíky jste stiskli, a v&nbsp;jakém přesně pořadí. Pokud spouštíte příkaz
+z&nbsp;příkazové řádky, přesně jej ocitujte. Jakmile je to možné, zašlete přesný
+záznam své interakce s&nbsp;programem: co jste napsali, jak program reagoval.
+
+<p>
+Sdělte programátorovi vše, co by mohl potřebovat. Pokud program načítá nějaký
+soubor, pošlete kopii toho souboru. Pokud program interaguje s&nbsp;jiným
+počítače, asi nebudete posílat kopii počítače, ale řekněte, co je to za počítač
+a co na něm běží za programy.
+
+
+<h3>"Mě to funguje ..."</h3>
+
+<p>
+Pokud zašlete programátorovi dlouhý seznam příkazů a reakcí na ně, a on spustí
+svoji vlastní kopii, provede přesně totéž, a k&nbsp;žádné chybě nedojde, pak
+jste mu nedali dost informací. Možná program selhává jen na některých
+počítačích; jeho a vaše prostředí se v&nbsp;něčem liší. Možná se pletete
+v&nbsp;tom, co má program přesně dělat. Koukáte oba přesně na totéž, ale vy si
+myslíte, že je to chyba, a on ví, že je to správně.
+
+<p>
+Řekněte tedy, proč takové chování programu považujete za chybu. Nebo lépe,
+řekněte přímo, jakou reakci byste od programu v&nbsp;takové situaci očekávali.
+Pokud řeknete jen "a pak se to rozbilo", pak vynecháváte podstatnou
+věc.
+
+<p>
+Pokud program sám produkuje nějaké chybové hlášky, řekněte to. Ocitujte je
+přesně, jsou důležité! V&nbsp;této fázi se programátor ještě nesnaží
+chybu opravit, snaží se ji teprve najít. Snaží se zjistit, co přesně se
+pokazilo, a chybové hlášky programu samotného jsou tím nejlepším vodítkem.
+Pokud nemáte jinou možnost, sami si chybovou hlášku opište. Je zbytečné
+prográmatorovi sdělovat, že "program ohlásil chybu", pokud nevíte
+jakou.
+
+<p>
+Pokud má chybová hláška svoje číslo, řekněte ho. Pokud vám ta čísla nic
+neříkají, neznamená to, že neříkají nic ani nikomu jinému. V&nbsp;číslech je
+obsažena spousta informací, kterým bude programátor rozumět, a leccos mu napoví.
+Ta čísla jsou tam proto, že program je příliš zmaten na to, aby se vyjádřil
+slovně; dělá co může, aby vám něco důležitého sdělil.
+
+<p>
+Programátor teď vyšetřuje. Neví, co se přesně stalo, nebyl u toho, hledá stopy.
+Chybové hlášky a nesrozumitelné chuchvalce čísel jsou pro něj otisky prstů na
+místě činu. Nesmažte je!
+
+<p>
+Pokud používáte UNIX, možná po programu zůstal <tt>core dump</tt>. To je soubor,
+který obsahuje spoustu informací o stavu programu v&nbsp;okamžiku chyby, jakási
+černá skříňka - nezahazujte ji! Nikdo nicméně nechce dostávat poštou obrovské
+soubory, proto se nejdříve zeptejte, než core dump pošlete. Uvědomte si také, že
+core dump obsahuje - spolu s&nbsp;ostatními informacemi o stavu programu - i
+veškerá "citlivá" data, které jste programu poskytli.
+
+
+<h3>"Tak jsem zkusila ..."</h3>
+
+<p>
+Pokud se vyskytne nějaká chyba, lze udělat mnoho různých věcí, a většina
+z&nbsp;nich to jenom zhorší. (Jednou na škole si kamarádka omylem smazala
+všechny wordovské dokumenty, a dříve než cokoli jiného reinstalovala Word a
+spustila defrag. To bylo samozřejmě k&nbsp;ničemu, ale místo na disku si
+zpřeházela tak, že už z&nbsp;toho žádný Undelete nedostal vůbec nic. Kdyby to
+nechala být, tak měla šanci.)
+
+<p>
+Takoví uživatelé jsou jako fretka zahnaná do kouta: zády ke zdi a tváří
+v&nbsp;tvář jisté smrti začne bezhlavě útočit, protože to přeci musí být lepší
+než nedělat nic. To u programů nefuguje.
+
+<p>
+Nebuďte fretka, buďte antilopa: když narazí na něco neočekávaného nebo děsivého,
+ztuhne. Zůstane naprosto klidná, snaží se nebudit žádnou pozornost, stojí a
+přemýšlí, co má dělat. (A kdyby měly antilopy linku technické podpory, tak by
+tam zavolala.) Jakmile přijde na to, co je potřeba udělat, udělá to.
+
+<p>
+Pokud se něco pokazí, přestaňte pracovat. Na nic nesahejte. Projděte obrazovku,
+všimněte si všech nesrovnalostí, a poznamenejte si je. Teprve potom odpovězte
+stiskem nějakého tlačítka. Vyviňte si takový reflex pro situace, kdy počítač
+udělá něco neočekávaného.
+
+<p>
+Pokud se vám podaří se problému nějak zbavit, třeba ukončením programu nebo
+rebootem počítače, pokuste se k&nbsp;chybě dojít znovu. Programátoři mají rádi
+problémy, které se dají reprodukovat. A spokojení programátoři opravují chyby
+rychleji a lépe.
+
+<h3>"Máš tu laserovou modulaci špatně polarisovanou!"</h3>
+
+<p>
+Špatná chybová hlášení nepřicházejí jen od neprogramátorů. Ta nejhorší, která
+jsem viděl, pocházela od programátorů, dokonce od dobrých programátorů.
+
+<p>
+Jednou jsem pracoval s&nbsp;programátorem, který ve svém kódu stále nacházel
+chyby, a snažil se je opravovat. Občas se mu to nedařilo a zavolal mi. "Co
+je špatně?" zeptal jsem se. Odpověděl mi, co by bylo potřeba - podle jeho
+názoru - opravit.
+
+<p>
+To fungovalo docela dobře, pokud byl jeho názor správný - půlku už měl tedy
+vlastně hotovou, a spolu jsme zvládli zbytek. Bylo to rychlé a užitečné.
+
+<p>
+Docela často se ale mýlil. Hledali jsme v&nbsp;kusu programu, odkud se berou ta
+chybná data, až jsme zjistili, že odnikud; půl hodiny jsme zkoumali zcela
+korektní kód, problém byl úplně jinde.
+
+<p>
+Přitom u doktora by něco takového učitě neudělal. "Pane doktore, potřebuju
+recept na Hydroyoyodyn!" - každý ví, že takhle se to nedělá; vy popíšete
+příznaky, bolesti a vyrážky, a diagnózu provede a léčbu předepíše doktor.
+(V&nbsp;opačném případě vás prostě diagnostikuje jako hypochondra nebo cvoka; a
+to nejspíš zcela správně.)
+
+<p>
+S&nbsp;programátory je to stejné: vaše vlastní diagnóza může někdy pomoci, ale
+hlavně uveďte příznaky. Vlastní diagnóza je jaksi navíc, není to náhrada. Stejně
+tak zaslat opravu chybného kódu je užitečné plus, ale nenahrazuje to popis
+chyby.
+
+<p>
+Pokud si programátor vyžádá další informace, nepodceňujte to. Jednou jsem dostal
+chybové hlášení, a požádal jsem uživatele ať spustí příkaz, o kterém jsem věděl,
+že jistě nebude fungovat - chtěl jsem vědět <em>kterou</em> chybovou hláškou (ze
+dvou možných) program odpoví. To by mi velmi pomohlo. On to ale nezkusil - jenom
+mi poslal "Ne, to nefunguje". Nějaký čas jsem ho přesvědčoval, ať to
+skutečně vyzkouší.
+
+<p>
+Pomáhat programátorovi vlastním rozumem je jistě hezké. I když se třeba mýlíte,
+měl by vám být vděčný, že se mu snažíte usnadnit život. Každopádně ale uvádějte
+hlavně příznaky, protože jinak mu život spíše komplikujete.
+
+
+<h3>"To je zvláštní, teď to fungovalo"</h3>
+
+<p>
+Řekněte programátorovi "taková občasná chyba ..." a sledujte, jak mu
+spadne čelist. Problémy, při kterých jednoduchá posloupnost úkonů vyvolá chybu,
+jsou snadné. Programátor může totéž provést znovu, pomalu, za ostře sledovaných
+testovacích podmínek, a detailně se podívat, co se děje. Často je to ale horší:
+chyba nastane třeba jednou za týden, nebo jednou za uherský rok, nebo nikdy
+(případně nikdy, když ji chcete programátorovi předvést), ale vždycky, když máte
+zítra odevzdávat hotový program.
+
+<p>
+Většina "občasných chyb" nejsou občasné chyby. Mají nějakou vnitřní
+logiku - nastávají třeba když dojde paměť, když <em>jiný</em> program změní
+nějaký kritický soubor, nebo nastávají vždy jen v&nbsp;první polovině hodiny!
+(To jsem viděl.)
+
+<p>
+Pokud se Vám daří chybu reprodukovat, ale programátorovi ne, může to znamenat,
+že se vaše počítače liší v&nbsp;něčem, co právě tu chybu způsobuje. Napsal jsem
+kdysi program, jehož okno se občas "zarolovalo" do levého horního rohu
+a tam trucovalo. To ale jen při rozlišení 800x600; na mém monitoru 1024x768 se
+to nikdy nestalo.
+
+<p>
+Programátora bude zajímat všechno, co o tom problému víte. Zkuste třeba to samé
+na jiném počítači. Zkuste to dvakrát nebo třikrát: dopadne to stejně? Pokud
+k&nbsp;chybě dochází při skutečné práci, ale nikoli při reprodukci chyby, může
+to být tím, že při práci máte otevřenou spoustu velkých souborů. Pamatujte si co
+nejvíce detailů o tom, co jste přesně udělali, než program selhal; pokud
+v&nbsp;tom vidíte nějakou zákonitost, řekněte to. Cokoli se může hodit. I když
+to bude jen statistický údaj ("děje se to častěji, když mám puštěný
+Emacs"), který neposkytuje přímou nápovědu, může to programátorovi pomoci
+chybu reprodukovat.
+
+<p>
+A co je nejdůležitější, programátor se bude chtít ujistit, zda běží skutečně o
+"náhodnou" chybu nebo je chyba závislá na počítači. Bude chtít vědět
+spoustu detailů o vašem počítači, aby je porovnal se svým. Mnoho detailů bude
+záviset na tom kterém programu, ale rozhodně si připravte čísla verzí: verzi
+programu, verzi operačního systému, a verze souvisejícíh programů.
+
+
+<h3>"Tak jsem to načetl ve Windows ..."</h3>
+
+<p>
+Vyjádřit se jasně je v&nbsp;chybovém hlášení zásadní věc. Pokud programátor
+nepochopí, co jste chěli říct, jako byste neposlali nic.
+
+<p>
+Sám dostávám chybová hlášení z&nbsp;celého světa. Spoustu z&nbsp;nich píší lidé,
+pro které angličtina není mateřským jazykem, a mnozí se za svou chatrnou
+angličtinu omlouvají. Taková hlášení jsou většinou naprosto jasná a velmi
+užitečná. Ta nejzmatenější přicházejí od rodilých mluvčí, patrně
+s&nbsp;předpokladem, že jim budu rozumět, i když se o to nebudou nikterak
+snažit.
+   
+<ul>
+<li><em>Buďte přesní.</em>
+Pokud se dá jedna věc udělat dvěma způsoby, řekněte, který jste použili.
+"Vybral jsem <tt>Load</tt>" může znamenat "kliknul jsem na
+<tt>Load</tt>" nebo "stisknul jsem <tt>Alt-L</tt>". A na tom
+rozdílu může záležet.
+
+<li><em>Nešetřete slovy.</em>
+Sdělte raději více než méně. Pokud řeknete příliš, programátor si z&nbsp;toho
+může vybrat. Pokud řeknete málo, bude vám muset sám napsat o další detaily.
+Jednou jsem dostal chybové hlášení sestávající z&nbsp;jediné věty. Když jsem se
+ptal dále, odpověděl uživatel vždy zase jednou větou. Trvalo to týdny, protože
+jsem informace dostával po jednotlivých větách.
+
+<li><em>Opatrně se zájmeny.</em>
+Neříkejte "to" nebo "okno", pokud není jasné, co tím
+myslíte. Například: "Spustil jsem Vrlakadizátor. Naběhlo chybové okno,
+zavřel jsem to, a spadlo to." Zavřel to okno, nebo celý program? To je
+rozdíl. Lepší je: "Spustil jsem Vrlakadizátor. Naběhlo chybové okno.
+Když jsem pokusil to okno zavřít, Vrlakadizátor spadnul." Je to delší,
+ale jasnější.
+
+<li><em>Přečtěte si, co jste napsali.</em>
+Než zprávu odešlete, sami si ji přečtěte. Pokud popisujete posloupnost příkazů,
+která reprodukuje chybu, zkuste to nejdříve sami provést přesně tak, jak píšete.
+Třeba jste něco vynechali.
+</ul>
+
+
+<h3>Shrnutí</h3>
+
+<ul>
+<li>
+Smyslem chybového hlášení je umožnit programátorovi spatřit chybu na vlastní
+oči. Pokud u toho nemůže osobně být, sdělte mu podrobně, jak chybu reprodukovat.
+
+<li>
+Pokud se programátorovi nedaří chybu reprodukovat, popište příznaky chyby. 
+Popište všechno detailně. Popište, co jste viděli. Řekněte, co jste očekávali.
+Vypište doslovně chybové hlášky, obzvláště pokud obsahují číselné údaje.
+
+<li>
+Provede-li počítač něco neočekávaného, ustaňte v&nbsp;práci. Nedělejte nic,
+dokud nebudete vědět co. Obzvláště nedělejte nic nebezpečného.
+
+<li>
+I když se pokusíte chybu diagnostikovat sami (což je v&nbsp;pořádku), hlavně
+popište příznaky chyby.
+
+<li>
+Buďte připraveni poskytnout programátorovi další informace. Kdyby je
+nepotřeboval, neptal by se; nedělá to proto, aby vás otravoval. Připravte
+si čísla verzí, budete je potřebovat.
+
+<li>
+Pište jasně. Ať je jasné, co jste chtěli říct, ať je vaše sdělení zcela
+jednoznačné.
+
+<li>
+A především, vyjadřujte se přesně. Programátoři to mají rádi.
+
+</ul>
+
+<hr>
+
+<h3>Závěr</h3>
+
+<p>
+Fretku ani antilopu jsem nikdy neviděl. Za svou zoologii neručím.
+
+<p>
+Připomínky zasílejte na adresu <a
+href="mailto:anakin@pobox.com">anakin@pobox.com</a>
+(pozn. překl.: Pochopitelně anglicky a k&nbsp;anglickému originálu. Připomínky
+k&nbsp;překladu jsou vítány.)
+
+<p>
+Pokud jste na tuto stránku přišli ze stránek nějakého programu, neposílejte
+svá chybová hlášení na výše uvedenou adresu - vraťte se na stránku odkud jste
+přišli, <em>tam</em> zjistíte, kam zasílat chyby.
+
+<div>
+[ Wed Jun  2 10:15:27 CEST 2004
+| <a href="http://validator.w3.org/check/referer">valid html</a>
+| hans NOSP@M stare.cz ]
+</div>
+
+</body>
+</html>
+
