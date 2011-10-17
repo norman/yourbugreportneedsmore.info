@@ -1,0 +1,590 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Comment signaler efficacement un bug</title>
+<meta content="text/html; charset=windows-1252" http-equiv=
+"Content-Type">
+</head>
+<body>
+<h2>Comment signaler efficacement un bug</h2>
+
+<p><em>Version originale &eacute;crite par Simon Tatham, programmeur
+professionnel et de logiciels libres;<br>
+traduit par Julien Kirch, d&eacute;veloppeur.</em></p>
+
+<p>[
+<a href="/tatham/en.html">English</a>
+|
+<a href="/tatham/br.html">Portugu&ecirc;s</a>
+|
+<a href="/tatham/cn.html">&#31616;&#20307;&#20013;&#25991;</a>
+|
+<a href="/tatham/cz.html">&#268;esky</a>
+|
+<a href="/tatham/da.html">Dansk</a>
+|
+<a href="/tatham/de.html">Deutsch</a>
+|
+<a href="/tatham/es.html">Espa&ntilde;ol</a>
+|
+<b>Fran&ccedil;ais</b>
+|
+<a href="/tatham/hu.html">Magyar</a>
+|
+<a href="/tatham/it.html">Italiano</a>
+|
+<a href="/tatham/jp.html">&#26085;&#26412;&#35486;</a>
+|
+<a href="/tatham/nl.html">Nederlands</a>
+|
+<a href="/tatham/pl.html">Polski</a>
+|
+<a href="/tatham/ru.html">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</a>
+|
+<a href="/tatham/tw.html">&#32321;&#39636;&#20013;&#25991;</a>
+]
+
+<h3><a name="intro">Introduction</a></h3>
+
+<p>Quiconque a d&eacute;j&agrave; d&eacute;velopp&eacute; un
+logiciel destin&eacute; &agrave; un usage public a probablement
+d&eacute;j&agrave; re&ccedil;u au moins un mauvais rapport de bug.
+Il y a les rapports qui ne disent rien ("&Ccedil;a ne marche
+pas&nbsp;!"), qui n'ont aucun sens, qui ne donnent pas assez
+d'informations, ou m&ecirc;me qui donnent de <em>fausses</em>
+informations. Il y a des comptes-rendus de probl&egrave;mes qui
+sont dus &agrave; des erreurs de l'utilisateur, dus au programme de
+quelqu'un d'autre, ou dus &agrave; des probl&egrave;mes de
+r&eacute;seau.</p>
+
+<p>Une chose explique qu'on consid&egrave;re le support technique
+comme une t&acirc;che horrible&nbsp;: les mauvais rapports de bug.
+Toutefois, tous les rapports de bug ne sont pas
+d&eacute;sagr&eacute;ables&nbsp;: quand je ne gagne pas ma vie, je
+d&eacute;veloppe des logiciels libres, et quelquefois je
+re&ccedil;ois des rapports de bug merveilleux, clairs, utiles et
+<em>informatifs</em>.</p>
+
+<p>Dans ce texte, je vais essayer d'exposer clairement ce qui fait
+un bon rapport de bug. Id&eacute;alement, j'aimerais que tout le
+monde sur terre lise ce texte avant de signaler un bug &agrave; qui
+que ce soit. En tous cas j'aimerais au moins que tous ceux qui
+<em>me</em> signalent des bugs l'aient lu.</p>
+
+<p>En gros, le but d'un rapport de bug est de permettre au
+programmeur de voir le programme planter devant lui. Vous pouvez
+soit lui montrer de visu, soit lui fournir des instructions
+soign&eacute;es et d&eacute;taill&eacute;es sur la fa&ccedil;on de
+le faire planter. S'il parvient &agrave; le faire planter, il
+essaiera de collecter des informations jusqu'&agrave;
+d&eacute;couvrir la cause du bug. S'il n'y parvient pas, il devra
+vous demander d'obtenir ces informations pour lui.</p>
+
+<p>Dans un rapport de bug, essayez de s&eacute;parer nettement les
+faits ("J'&eacute;tais devant l'ordinateur et ceci <em>s'est
+produit</em>") des sp&eacute;culations ("Je <em>pense</em> que
+c'est &ccedil;a le probl&egrave;me"). Si vous voulez, vous pouvez
+laisser tomber les sp&eacute;culations, mais en aucun cas les
+faits.</p>
+
+<p>Quand vous signalez un bug, vous le faites car vous voulez que
+ce bug soit corrig&eacute;. Ce n'est pas la peine de houspiller les
+programmeurs, ou de leur faire d&eacute;lib&eacute;r&eacute;ment
+perdre leur temps : c'est peut-&ecirc;tre leur faute et votre
+probl&egrave;me, et vous avez le droit d'&ecirc;tre en
+col&egrave;re contre eux, mais le bug sera corrig&eacute; plus
+rapidement si vous les aidez en leur fournissant toutes les
+informations dont ils ont besoin. D'autre part, n'oubliez pas que
+si ce programme est gratuit, c'est que l'auteur s'en occupe par
+gentillesse, alors si trop de gens se montrent d&eacute;sobligeants
+avec lui, il arr&ecirc;tera peut-&ecirc;tre d'&ecirc;tre
+gentil.</p>
+
+<h3><a name="respect">"&Ccedil;a ne fonctionne pas"</a></h3>
+
+<p>Les programmeurs ne sont pas des idiots : si le programme ne
+fonctionnait pas du tout, ils s'en seraient probablement
+d&eacute;j&agrave; rendu compte. Comme ils n'ont rien
+remarqu&eacute;, pour eux, il doit fonctionner. Donc, soit vous
+faites quelque chose d'une autre mani&egrave;re qu'eux, ou votre
+environnement est diff&eacute;rent du leur. Ils ont besoin
+d'informations&nbsp;; leur fournir ces informations et l'objectif
+d'un rapport de bug. Plus d'informations est toujours mieux que
+moins.</p>
+
+<p>Beaucoup de programmes, particuli&egrave;rement les programmes
+libres, sont accompagn&eacute;s de la liste de leurs bugs connus.
+Si vous pouvez mettre la main dessus, mieux vaudrait la lire pour
+v&eacute;rifier si le bug que vous venez de d&eacute;couvrir n'est
+pas d&eacute;j&agrave; r&eacute;f&eacute;renc&eacute;. S'il l'est
+d&eacute;j&agrave;, il est probablement inutile de faire un nouveau
+rapport, sauf si vous pensez disposer de plus d'informations que
+n'en contient le rapport dans la liste de bugs. Les programmeurs
+pourront peut-&ecirc;tre corriger plus facilement le bug si vous
+leur fournissez des informations qu'ils ne poss&egrave;dent pas
+encore.</p>
+
+<p>Ce texte est rempli de consignes, et aucune d'entre elles n'est
+une r&egrave;gle absolue. Certains programmeurs veulent que les
+bugs leur soient signal&eacute;s sous une forme
+particuli&egrave;re. Si le programme est fourni avec son propre
+assortiment de r&egrave;gles de rapport de bug, lisez le. S'il
+contredit celles de ce texte, suivez le.</p>
+
+<p>Si vous ne signalez pas un bug mais demandez seulement de l'aide
+pour utiliser le programme, vous devriez indiquer o&ugrave; vous
+avez d&eacute;j&agrave; cherch&eacute; la r&eacute;ponse &agrave;
+votre question ("J'ai regard&eacute; dans le chapitre 4 et dans la
+section 5.2 mais je n'ai rien trouv&eacute; m'indiquant si
+c'&eacute;tait possible"). Cela permettra aux programmeurs de
+savoir o&ugrave; les gens pensent trouver la r&eacute;ponse, et
+ainsi d'am&eacute;liorer la documentation.</p>
+
+<h3><a name="showme">"Montre moi."</a></h3>
+
+<p>L'une des meilleures mani&egrave;res dont vous pouvez signaler
+un bug est de le montrer &agrave; un programmeur. Amenez-le devant
+votre ordinateur, lancez son programme, et montrez lui ce qui se
+passe mal. Laissez le vous voir d&eacute;marrer la machine, lancer
+le programme, l'utiliser, et voir comment il r&eacute;pond &agrave;
+vos actions.</p>
+
+<p>Il conna&icirc;t ce programme comme sa poche. Il sait en quelles
+parties il peut avoir confiance, et quelles parties peuvent avoir
+des d&eacute;fauts. Il sait intuitivement ce qu'il cherche. Quand
+arrive le moment o&ugrave; le programme se met &agrave; faire
+clairement n'importe quoi, il a peut-&ecirc;tre d&eacute;j&agrave;
+remarqu&eacute; une <em>l&eacute;g&egrave;re</em> erreur survenue
+plus t&ocirc;t et qui pourrait lui donner une indication. Il peut
+observer tout ce que fait l'ordinateur pendant le test et noter les
+choses importantes.</p>
+
+<p>Cela ne sera peut-&ecirc;tre pas suffisant. Il pourrait
+d&eacute;cider qu'il a besoin de plus d'informations, et vous
+demander de refaire la m&ecirc;me chose. Il pourrait vous demander
+de lui d&eacute;crire toute l'op&eacute;ration, pour qu'il puisse
+reproduire le bug autant de fois qu'il le d&eacute;sire. Il
+pourrait faire varier la proc&eacute;dure plusieurs fois, pour
+v&eacute;rifier si le probl&egrave;me appara&icirc;t dans un seul
+cas ou dans un ensemble li&eacute; de cas. Si vous &ecirc;tes
+malchanceux, il aura peut-&ecirc;tre besoin de prendre votre place
+pendant quelques heures, avec des outils de d&eacute;veloppement,
+et <em>vraiment</em> commencer &agrave; creuser. Mais la chose la
+plus importante est que le programmeur observe l'ordinateur quand
+&ccedil;a se passe mal. Quand il a vu le probl&egrave;me se
+produire, il peut g&eacute;n&eacute;ralement commencer &agrave; le
+r&eacute;soudre.</p>
+
+<h3><a name="showmehow">"Montre moi comment y arriver"</a></h3>
+
+<p>Nous sommes &agrave; l'&egrave;re d'Internet, de la
+communication globale, o&ugrave; en appuyant simplement sur un
+bouton, je peux envoyer mon programme &agrave; quelqu'un en Russie,
+et o&ugrave; tout aussi simplement il peut m'envoyer ses
+commentaires sur celui-ci. Mais s'il a un probl&egrave;me avec mon
+programme, je ne peux <em>pas</em> aller chez lui voir le programme
+planter. "Montre moi" c'est bien quand on peut, mais souvent, on ne
+peut pas.</p>
+
+<p>Si vous devez signaler un bug &agrave; un programmeur qui ne
+peut &ecirc;tre physiquement pr&eacute;sent, le but de l'exercice
+est de lui permettre de <em>reproduire</em> ce bug. Vous voulez que
+le programmeur ex&eacute;cute sa propre copie du programme,
+effectue les m&ecirc;mes manipulations, et le fasse planter de la
+m&ecirc;me mani&egrave;re. Quand il r&eacute;ussit &agrave; faire
+planter le programme devant lui, il peut s'en occuper.</p>
+
+<p>Alors dites-lui <em>exactement</em> ce que vous avez fait. S'il
+s'agit d'un programme graphique, dites lui sur quels boutons vous
+avez cliqu&eacute;, et dans quel ordre. Si c'est un programme que
+vous avez lanc&eacute; par une commande, donnez lui
+pr&eacute;cis&eacute;ment la commande que vous avez
+utilis&eacute;e. Si possible, vous devriez lui fournir une
+transcription compl&egrave;te de la session, montrant quelles
+commandes vous avez tap&eacute;es, et quelles r&eacute;ponses
+l'ordinateur a retourn&eacute;es.</p>
+
+<p>Donnez au programmeur toutes les entr&eacute;es auxquelles vous
+pouvez penser. Si le programme lit un fichier, vous devriez
+probablement en envoyer une copie. Si l'ordinateur communique avec
+un autre ordinateur via un r&eacute;seau, vous ne pourrez
+probablement pas envoyer une copie de cet ordinateur, mais vous
+pouvez au moins indiquer de quel type d'ordinateur il s'agit, et
+(si vous le pouvez) quels logiciels s'y ex&eacute;cutent.</p>
+
+<h3><a name="describe">"Chez moi &ccedil;a fonctionne. Alors
+d'o&ugrave; vient le probl&egrave;me ?"</a></h3>
+
+<p>Si vous donnez au programmeur une longue liste d'entr&eacute;es
+et d'actions, qu'il lance sa propre copie du programme, et qu'aucun
+probl&egrave;me n'appara&icirc;t, c'est que vous ne lui avez pas
+donn&eacute; suffisamment d'informations. Peut-&ecirc;tre que
+l'erreur n'appara&icirc;t pas sur tous les ordinateurs ; vos deux
+syst&egrave;mes diff&egrave;rent peut-&ecirc;tre d'une
+mani&egrave;re ou d'une autre. Vous avez peut-&ecirc;tre mal
+compris ce que le programme est cens&eacute; faire, et vous
+&ecirc;tes tous deux exactement devant le m&ecirc;me &eacute;cran,
+mais vous pensez qu'il s'agit d'une erreur, et il sait qu'il n'y a
+aucun probl&egrave;me.</p>
+
+<p>Donc d&eacute;crivez ce qui s'est pass&eacute;. Dites
+<em>exactement</em> ce que vous avez vu. Dites pourquoi vous pensez
+que ce que vous avez vu &eacute;tait une erreur ; au mieux dites
+lui exactement ce que vous pensiez voir. Si vous dites "et
+l&agrave;, &ccedil;a a plant&eacute;", vous oubliez des
+informations tr&egrave;s importantes.</p>
+
+<p>Si des messages d'erreur apparaissent, rapportez les
+soigneusement et pr&eacute;cis&eacute;ment au programmeur. Ils sont
+<em>importants</em>. A cet instant, le programmeur n'essaie pas de
+r&eacute;soudre le probl&egrave;me : il essaie seulement de le
+localiser. Il a besoin de savoir ce qu'il s'est mal pass&eacute;,
+et ces messages d'erreurs repr&eacute;sentent le r&eacute;sultat
+des efforts de l'ordinateur pour vous l'indiquer. Recopiez ces
+erreurs si vous n'avez pas d'autre moyen de les conserver, mais il
+n'est pas tr&egrave;s utile d'indiquer que le programme a
+g&eacute;n&eacute;r&eacute; une erreur, &agrave; moins que vous ne
+puissiez rapporter &eacute;galement quel &eacute;tait ce message
+d'erreur.</p>
+
+<p>En particulier, si le message d'erreur comprend des nombres,
+<em>rapportez les</em> au programmeur. Ce n'est pas parce que vous
+n'y voyez aucune signification qu'ils n'en ont pas. Ces nombres
+contiennent toutes sortes d'informations qui peuvent &ecirc;tre
+exploit&eacute;es par les programmeurs, et qui sont susceptibles de
+contenir des indications vitales. Les nombres dans les messages
+d'erreurs apparaissent dans les cas o&ugrave; l'ordinateur est trop
+embrouill&eacute; pour rendre compte de l'erreur sous forme de
+mots, mais il fait son possible pour vous fournir les informations
+importantes d'une mani&egrave;re ou d'une autre.</p>
+
+<p>&Agrave; ce moment, le programmeur effectue en fait un travail
+de d&eacute;tective. Il ne sait pas ce qui est arriv&eacute;, et ne
+peut pas s'approcher suffisamment pour le voir par lui-m&ecirc;me,
+il cherche donc des &eacute;l&eacute;ments lui permettant de
+d&eacute;couvrir ce qu'il cherche. Les messages d'erreurs, les
+cha&icirc;nes de nombres incompr&eacute;hensibles, et m&ecirc;mes
+des retards inexpliqu&eacute;s sont pour lui comme des empreintes
+digitales sur la sc&egrave;ne d'un crime. Conservez les&nbsp;!</p>
+
+<p>Si vous utilisez Unix, le programme a peut-&ecirc;tre
+g&eacute;n&eacute;r&eacute; un core dump. Les core dumps sont une
+source d'informations particuli&egrave;rement bonne, alors ne les
+effacez pas. D'un autre c&ocirc;t&eacute;, la plupart des
+programmeurs n'appr&eacute;cient gu&egrave;re de recevoir
+d'&eacute;normes core dumps par mail sans avoir &eacute;t&eacute;
+pr&eacute;venu, alors demandez leur avant d'en envoyer un. Sachez
+&eacute;galement que les core dump contiennent un enregistrement
+complet de l'&eacute;tat du programme, toute donn&eacute;e
+"secr&egrave;te" (si par exemple le programme contenait un message
+personnel, ou traitait des donn&eacute;es confidentielles) peut
+&ecirc;tre contenue dans ce fichier.</p>
+
+<h3><a name="antelope">"Alors j'ai essay&eacute;&nbsp;..."</a></h3>
+
+<p>Quand un bug arrive, vous pouvez faire beaucoup de choses.
+Beaucoup d'entre elles ne font qu'aggraver le probl&egrave;me. Une
+de mes amies &agrave; l'&eacute;cole a effac&eacute; tous ses
+fichiers Word par erreur, et avant de demander de l'aide, elle a
+essay&eacute; de r&eacute;installer Word, puis de lancer defrag.
+Aucun des deux n'a contribu&eacute; &agrave;
+r&eacute;cup&eacute;rer les fichiers, et ils ont
+alt&eacute;r&eacute; le disque dur au point qu'aucun programme de
+r&eacute;cup&eacute;ration ne serait capable de sauver quoi que ce
+soit. Si elle n'avait rien fait, elle aurait pu avoir une
+chance.</p>
+
+<p>Ce genre d'utilisateurs est comme une mangouste accul&eacute;e
+dans un coin&nbsp;: le dos au mur et voyant une mort certaine
+arriver, elle attaque fr&eacute;n&eacute;tiquement parce qu'il vaut
+mieux faire quelque chose plut&ocirc;t que rien. Mais cette
+attitude n'est pas tr&egrave;s bien adapt&eacute;e au type de
+probl&egrave;mes que les ordinateurs produisent.</p>
+
+<p>Au lieu d'&ecirc;tre une mangouste, soyez une antilope. Quand
+une antilope est confront&eacute;e avec quelque chose d'inattendu
+ou d'effrayant, elle s'immobilise. Elle reste totalement immobile
+et essaie de ne pas attirer l'attention; et, pendant qu'elle est
+stopp&eacute;e, elle r&eacute;fl&eacute;chit &agrave; la meilleure
+chose &agrave; faire. (Si les antilopes disposaient d'un support
+technique, c'est &agrave; ce moment l&agrave; qu'elles
+t&eacute;l&eacute;phoneraient.) Puis, une fois qu'elle a
+d&eacute;cid&eacute; quelle &eacute;tait la chose la plus
+s&ucirc;re &agrave; faire, elle la fait.</p>
+
+<p>Quand quelque chose se passe mal, cessez imm&eacute;diatement de
+faire <em>quoi que ce soit</em>. N'appuyez sur aucun bouton.
+Regardez l'&eacute;cran et observez tout ce qui sort de
+l'ordinaire, et souvenez vous-en ou notez le. Ensuite seulement,
+vous pourrez cliquer prudemment sur "OK" ou "Annuler", suivant ce
+qui vous semble le plus s&ucirc;r. Essayez de d&eacute;velopper une
+r&eacute;action r&eacute;flexe&nbsp;: si un ordinateur a une
+r&eacute;action inattendue, arr&ecirc;tez vous.</p>
+
+<p>Si vous r&eacute;ussissez &agrave; vous tirer du
+probl&egrave;me, que ce soit en fermant l'application
+concern&eacute;e ou en rebootant l'ordinateur, il serait bon
+d'essayer de le reproduire. Les programmeurs aiment les
+probl&egrave;mes qu'ils peuvent reproduire. Et les programmeurs
+heureux corrigent les bugs plus rapidement, et plus
+efficacement.</p>
+
+<h3><a name="symptoms">"Je pense que la modulation tachyonique doit
+&ecirc;tre mal polaris&eacute;e"</a></h3>
+
+<p>Les non programmeurs n'ont pas le monopole des mauvais rapports
+d'erreur. Certains des plus mauvais rapports d'erreur que j'ai
+jamais vu proviennent de programmeurs, et m&ecirc;me de bons
+programmeurs.</p>
+
+<p>Il m'est arriv&eacute; une fois, de travailler avec un autre
+programmeur, qui ne cessait de trouver de erreurs dans son propre
+code et de les corriger. De temps en temps il tombait sur un bug
+qu'il n'arrivait pas &agrave; corriger et il me demandait de
+l'aide. "Quel est le probl&egrave;me ?", lui demandais-je. Il me
+r&eacute;pondait en me donnant sa propre opinion sur ce qu'il
+fallait corriger.</p>
+
+<p>Quand son opinion &eacute;tait juste, &ccedil;a se passait bien.
+Dans ce cas, il avait d&eacute;j&agrave; fait la moiti&eacute; du
+travail, et nous &eacute;tions capable de terminer ensemble.
+C'&eacute;tait efficace et utile.</p>
+
+<p>Mais parfois, il se trompait. Nous pouvions alors passer un
+certain temps &agrave; essayer de comprendre pourquoi une certaine
+partie du programme produisait des donn&eacute;es incorrectes, pour
+parfois nous rendre compte qu'au contraire il fonctionnait
+parfaitement, et que nous venions de passer une demi-heure &agrave;
+examiner une portion de code parfaitement fonctionnelle, et qu'en
+fait le probl&egrave;me se situait ailleurs.</p>
+
+<p>Je suis s&ucirc;r qu'il ne se conduirait pas ainsi avec un
+m&eacute;decin: "Docteur, je voudrais une prescription pour de
+l'Hydroyoyodyne." Les gens savent qu'il ne faut pas se conduire
+ainsi avec un m&eacute;decin&nbsp;: vous lui d&eacute;crivez les
+sympt&ocirc;mes, g&egrave;nes, souffrances, douleurs,
+&eacute;ruptions et fi&egrave;vres, et vous le laissez
+diagnostiquer le probl&egrave;me et ce qu'il faut faire. Dans le
+cas contraire, le m&eacute;decin vous prend pour un hypocondriaque
+ou un cingl&eacute;, et il a plut&ocirc;t raison.</p>
+
+<p>Il en va de m&ecirc;me avec les programmeurs. Fournir votre
+propre diagnostic est parfois utile, mais donnez toujours les
+sympt&ocirc;mes. Le diagnostic est un plus, et pas une alternative
+aux sympt&ocirc;mes. De m&ecirc;me, envoyer une modification
+&agrave; effectuer sur le code pour r&eacute;soudre est un bon
+ajout &agrave; un rapport de bug, mais pas un substitut
+ad&eacute;quat.</p>
+
+<p>Si un programmeur vous demande des informations
+suppl&eacute;mentaires, ne l'ignorez pas. Une fois, quelqu'un m'a
+signal&eacute; un bug, et je lui ai demand&eacute; d'essayer une
+commande en sachant qu'elle ne fonctionnerait pas. Je voulais qu'il
+l'essaie parce que je voulais savoir lequel de deux messages
+d'erreur allait en r&eacute;sulter. Avoir cette r&eacute;ponse
+m'aurait donn&eacute; un indice vital. Mais il n'a pas
+essay&eacute;, il s'est content&eacute; de me r&eacute;pondre "Non,
+&ccedil;a ne fonctionnera pas". Il m'a fallu du temps pour le
+persuader d'essayer r&eacute;ellement.</p>
+
+<p>C'est tr&egrave;s bien d'utiliser son intelligence pour aider le
+programmeur. M&ecirc;me si vos d&eacute;ductions sont fausses, le
+programmeur devrait vous &ecirc;tre reconnaissant d'avoir, au
+moins, essay&eacute; de lui simplifier la vie. Mais n'oubliez pas
+de lui fournir aussi les sympt&ocirc;mes, sans cela vous pourriez
+bien lui rendre la vie bien plus difficile.</p>
+
+<h3><a name="intermittent">"C'est marrant, j'ai fait &ccedil;a il y
+a juste une seconde."</a></h3>
+
+<p>Dites "bug intermittent" &agrave; n'importe quel programmeur et
+regardez son visage se d&eacute;composer. Les probl&egrave;mes
+simples sont ceux qui sont d&eacute;clench&eacute;s par une
+s&eacute;quence d'actions simple. Dans ce cas le programmeur peut
+r&eacute;p&eacute;ter ces actions, en observant attentivement les
+conditions de tests et surveiller en d&eacute;tail ce qui arrive.
+Trop de probl&egrave;mes ne suivent pas cette r&egrave;gle : il y a
+des programmes qui se plantent une fois par semaine, de temps en
+temps, ou jamais quand vous essayez devant le programmeur, mais
+syst&eacute;matiquement quand une deadline se rapproche.</p>
+
+<p>La plupart des bugs intermittents ne sont pas r&eacute;ellement
+intermittents. Ils ob&eacute;issent g&eacute;n&eacute;ralement
+&agrave; une certaine logique. Certains se manifestent quand la
+machine arrive &agrave; court de m&eacute;moire, certains quand un
+autre programme essaie de modifier un fichier critique au mauvais
+moment, et certains uniquement pendant la premi&egrave;re demie de
+chaque heure. (J'en ai d&eacute;j&agrave; vu un de cette
+derni&egrave;re sorte).</p>
+
+<p>Par ailleurs, si vous pouvez reproduire le bug, mais que le
+programmeur n'y parvient pas, il se peut tr&egrave;s bien que vos
+ordinateurs diff&egrave;rent, et que ce soit cette
+diff&eacute;rence, qui cause le probl&egrave;me. Un jour j'ai eu un
+programme dont la fen&ecirc;tre s'enroulait en une petite balle
+dans le coin sup&eacute;rieur gauche de l'&eacute;cran, et restait
+l&agrave; <em>&agrave; bouder</em>. Mais il ne se comportait ainsi
+que sur des &eacute;crans 800x600, sur mon moniteur 1024x768, tout
+se passait bien.</p>
+
+<p>Le programmeur voudra conna&icirc;tre tout ce que vous pouvez
+d&eacute;couvrir sur le probl&egrave;me. Essayez sur une autre
+machine. Essayez deux ou trois fois pour conna&icirc;tre la
+fr&eacute;quence du plantage. Si &ccedil;a se passe mal quand vous
+faites un travail lourd mais pas quand vous voulez le montrer,
+c'est que c'est peut-&ecirc;tre l'utilisation pendant une longue
+dur&eacute;e ou avec de gros fichiers qui cause le probl&egrave;me.
+Essayez de vous rappeler autant de d&eacute;tails que vous le
+pouvez sur ce que vous faisiez quand l'erreur est apparue, et si
+vous y voyez un mod&egrave;le, mentionnez le. Toute information
+peut &ecirc;tre utile, m&ecirc;me s'il ne s'agit que d'une
+probabilit&eacute; (comme "&ccedil;a a tendance &agrave; planter
+plus souvent quand emacs est lanc&eacute;"), peut-&ecirc;tre que
+&ccedil;a ne donne pas d'indication directe sur la cause du
+probl&egrave;me, mais il est possible que &ccedil;a puisse aider le
+programmeur &agrave; le reproduire.</p>
+
+<p>Et le plus important : le programmeur voudra &ecirc;tre
+s&ucirc;r de savoir s'il s'agit d'une vraie erreur intermittente ou
+d'un bug sp&eacute;cifique &agrave; l'ordinateur. Il voudra
+conna&icirc;tre le maximum de d&eacute;tails sur votre ordinateur,
+pour pouvoir travailler sur ce qui le diff&eacute;rencie du sien.
+Beaucoup d'entre eux sont sp&eacute;cifiques au programme, mais les
+num&eacute;ros de versions seront tr&egrave;s certainement une
+chose &agrave; pr&eacute;ciser : le num&eacute;ro de version du
+programme, celui du syst&egrave;me d'exploitation, et probablement
+ceux de tout programmes impliqu&eacute;s dans le
+probl&egrave;me.</p>
+
+<h3><a name="clarity">"Alors j'ai charg&eacute; ma disquette dans
+Windows . . ."</a></h3>
+
+<p>Il est essentiel qu'un rapport de bug soit r&eacute;dig&eacute;
+clairement. Si le programmeur ne parvient pas &agrave; comprendre
+ce que vous voulez dire, vous auriez tout aussi bien fait de
+n'avoir rien &eacute;crit.</p>
+
+<p>Je re&ccedil;ois des rapports de bugs qui viennent de partout.
+Beaucoup d'entre eux proviennent de personnes dont l'anglais n'est
+pas la langue maternelle, et un grand nombre d'entre eux s'excusent
+de leur mauvais anglais. En g&eacute;n&eacute;ral, ces rapports de
+bugs sont clairs et utiles ; les rapports les plus obscurs
+&eacute;tant envoy&eacute;s par des personnes dont l'anglais est la
+langue maternelle, et qui pensent que je parviendrai &agrave; les
+comprendre m&ecirc;me s'ils ne font aucun effort de clart&eacute;
+ou de pr&eacute;cision.</p>
+
+<ul>
+<li><em>Soyez sp&eacute;cifique.</em> Si vous pouvez faire une
+chose de deux mani&egrave;res diff&eacute;rentes, indiquez celle
+que vous avez utilis&eacute;e. "J'ai s&eacute;lectionn&eacute;
+Charger" peut signifier "J'ai cliqu&eacute; sur charger" ou "J'ai
+appuy&eacute; sur ALT-L". &Ccedil;a peut sembler inutile, mais
+parfois, &ccedil;a compte.</li>
+
+<li><em>Soyez prolixe.</em> Donnez plut&ocirc;t plus d'informations
+que moins. Si vous en dites trop, le programmeur pourra en ignorer
+une partie, mais si vous n'en dites pas suffisamment, il devra vous
+r&eacute;pondre en vous posant d'autres questions. Il m'est
+arriv&eacute; de recevoir un rapport d'erreur constitu&eacute;
+d'une seule phrase ; et &agrave; chacune de mes demandes
+d'informations, la r&eacute;ponse du rapporteur tenait en une
+phrase. Il m'a fallu plusieurs semaines pour obtenir une
+quantit&eacute; suffisante d'information, tellement les
+r&eacute;ponses &eacute;taient br&egrave;ves.</li>
+
+<li><em>Faites attention aux pronoms.</em> N'utilisez pas des mots
+comme "il", ou des r&eacute;f&eacute;rences comme "la
+fen&ecirc;tre" quand leur signification est impr&eacute;cise.
+Consid&eacute;rez l'exemple suivant : "J'ai lanc&eacute;
+l'application FooApp. Elle a affich&eacute; une fen&ecirc;tre
+d'erreur. J'ai essay&eacute; de la fermer et elle a plant&eacute;".
+Quel &eacute;l&eacute;ment l'utilisateur a-t-il bien pu
+essay&eacute; de fermer ? S'agit-il de la fen&ecirc;tre d'erreur ou
+de toute l'application ? &Ccedil;a fait une diff&eacute;rence ! Au
+lieu de cela, dites plut&ocirc;t : "J'ai lance l'application
+FooApp. Elle a affich&eacute; une fen&ecirc;tre d'erreur. J'ai
+essay&eacute; de fermer la fen&ecirc;tre d'erreur et FooApp a
+plant&eacute;". C'est plus long et r&eacute;p&eacute;titif, mais
+&eacute;galement plus clair et moins susceptible d'&ecirc;tre
+compris de travers.</li>
+
+<li><em>Relisez ce que vous avez &eacute;crit.</em> Relisez le
+rapport et voyez si vous pensez qu'il est clair. Si vous avez fait
+une liste des actions qui devraient produire le bug, essayez de la
+suivre, et v&eacute;rifier ainsi qu'aucune &eacute;tape ne
+manque.</li>
+</ul>
+
+<h3><a name="summary">R&eacute;sum&eacute;</a></h3>
+
+<ul>
+<li>Le premier objectif d'un rapport de bug est de permettre au
+programmeur de voir le bug de ses propres yeux. Si vous <em>ne
+pouvez</em> le faire planter devant lui, donnez lui des
+instructions <em>d&eacute;taill&eacute;es</em> afin qu'il puisse le
+faire planter par lui-m&ecirc;me.</li>
+
+<li>Si le premier objectif ne peut &ecirc;tre atteint, et donc si
+le programmeur ne peut voir l'erreur se produire, le second
+objectif d'un rapport de bug est de d&eacute;crire ce qui s'est mal
+pass&eacute;. D&eacute;crivez tout, en d&eacute;tails. Dites ce que
+vous avez vu, mais dites aussi ce que vous vous attendiez &agrave;
+voir. Recopiez les messages d'erreur, <em>surtout</em> s'ils
+contiennent des nombres.</li>
+
+<li>Quand votre ordinateur fait quelque chose d'inattendu,
+<em>arr&ecirc;tez-vous</em>. Ne faites rien tant que vous
+n'&ecirc;tes pas calme, et ne faites rien que vous pensez pouvoir
+&ecirc;tre dangereux.</li>
+
+<li>Bien entendu, si vous pensez en &ecirc;tre capable,
+diagnostiquez l'erreur par vous-m&ecirc;me, mais si vous le faites,
+vous devriez tout de m&ecirc;me lui communiquer les
+sympt&ocirc;mes.</li>
+
+<li>Soyez pr&ecirc;t &agrave; fournir des informations
+suppl&eacute;mentaires si le programmeur en a besoin. S'il pouvait
+s'en passer, il ne vous les demanderait pas. Il ne vous
+d&eacute;range pas pour le plaisir.</li>
+
+<li>&Eacute;crivez clairement. Dites ce que vous voulez dire, et
+soyez s&ucirc;r que &ccedil;a ne peut pas &ecirc;tre mal
+compris.</li>
+
+<li>Et surtout, soyez pr&eacute;cis : les programmeurs aiment la
+pr&eacute;cision.</li>
+</ul>
+
+<hr>
+<p><em>Pr&eacute;cision :</em> je n'ai en fait jamais vu ni
+mangouste ni antilope, ma zoologie est donc peut-&ecirc;tre
+incorrecte.</p>
+
+<p><em>$Id: bugs-fr.html 9171 2011-05-10 17:39:06Z simon $<br>
+ Traduction v1.0 2003/07/15</em></p>
+
+<p>Copyright &copy; 1999 Simon Tatham.<br>
+Ce document est <a href=
+"http://www.opencontent.org/">OpenContent</a>.<br>
+Vous pouvez le copier et en utiliser le texte selon les
+r&egrave;gles de le la <a href=
+"http://www.opencontent.org/opl.shtml">License OpenContent</a>.<br>
+Envoyez commentaires et critiques sur la version originale de ce
+texte &agrave; <a href=
+"mailto:anakin@pobox.com">anakin@pobox.com</a> et sur sa traduction
+&agrave; <a href=
+"mailto:j.kirch-ext@laposte.net">j.kirch-ext@laposte.net</a>.<br>
+La <a href=
+"http://www.chiark.greenend.org.uk/~sgtatham/bugs.html">version
+originale</a> du texte (en anglais).<br>
+Une <a href=
+"http://www.chiark.greenend.org.uk/~sgtatham/bugs-de.html">traduction
+allemande</a> est &eacute;galement disponible.<br>
+Si vous avez aboutit &agrave; cette page en suivant un lien sur un
+site concernant un programme particulier, merci de ne pas envoyer
+de rapport pour ce programme &agrave; l'adresse ci-dessus. Au lieu
+de cela, retournez &agrave; la page dont vous venez pour trouver
+comment rapporter un bug pour ce programme.</p>
+</body>
+</html>
