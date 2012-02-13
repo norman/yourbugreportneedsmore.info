@@ -1,0 +1,574 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<TITLE>Fehlerberichte - wie Sie Softwarefehler melden sollten</TITLE>
+</HEAD>
+<BODY>
+<H2>Fehlerberichte - wie Sie Softwarefehler melden sollten</H2>
+<P>von
+<i>Simon Tatham,
+Berufsprogrammierer und Programmierer freier Software</i><br>
+</P>
+
+<p>[
+<a href="/tatham/en.html">English</a>
+|
+<a href="/tatham/br.html">Portugu&ecirc;s</a>
+|
+<a href="/tatham/cn.html">&#31616;&#20307;&#20013;&#25991;</a>
+|
+<a href="/tatham/cz.html">&#268;esky</a>
+|
+<a href="/tatham/da.html">Dansk</a>
+|
+<b>Deutsch</b>
+|
+<a href="/tatham/es.html">espa&ntilde;ol</a>
+|
+<a href="/tatham/fr.html">Fran&ccedil;ais</a>
+|
+<a href="/tatham/hu.html">Magyar</a>
+|
+<a href="/tatham/it.html">Italiano</a>
+|
+<a href="/tatham/jp.html">&#26085;&#26412;&#35486;</a>
+|
+<a href="/tatham/nl.html">Nederlands</a>
+|
+<a href="/tatham/pl.html">Polski</a>
+|
+<a href="/tatham/ru.html">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</a>
+|
+<a href="/tatham/tw.html">&#32321;&#39636;&#20013;&#25991;</a>
+]
+
+<!-- begin essay -->
+
+<a name="intro"><h3>Einleitung</h3></a>
+<P>Jeder,
+der Software f&uuml;r die Allgemeinheit geschrieben hat, wird
+wahrscheinlich schon einmal einen schlechten Fehlerbericht erhalten
+haben. Nichts sagende Berichte (&quot;Es geht nicht!&quot;),
+Berichte, die keinen Sinn ergeben, Berichte, die einem nicht genug
+Informationen geben, Berichte, die einem <em>falsche</em>
+Informationen geben. Berichte von Problemen, die sich schlie&szlig;lich
+als Fehlbedienung durch den Benutzer herausstellen, oder bei denen
+das Problem bei einem anderen Programm liegt oder die auf
+Netzwerkfehler zur&uuml;ckzuf&uuml;hren sind.</P>
+<P>Es
+gibt einen Grund, warum die Arbeit f&uuml;r eine Anwenderhotline als
+Horror angesehen wird und dieser Grund sind schlechte Fehlerberichte.
+Andererseits sind nicht alle Fehlerberichte unangenehm. Wenn ich
+nicht gerade meinen Lebensunterhalt verdiene, so entwickle und pflege
+ich freie Software und manchmal erhalte ich wunderbar klare,
+hilfreiche, <em>informative</em> Fehlerberichte. 
+</P>
+<P>In
+dieser Anleitung werde ich versuchen, Ihnen klarzumachen, was einen
+guten Fehlerbericht ausmacht. Meine Idealvorstellung w&auml;re es,
+dass jeder diese Anleitung liest, bevor er irgendwem irgendwelche
+Fehlerberichte schickt. Auf alle F&auml;lle h&auml;tte ich es gerne,
+dass Leute, die <em>mir</em> Fehlerberichte senden,
+das hier lesen. 
+</P>
+<P>Kurz
+gefasst ist das Ziel eines Fehlerberichts, es dem Programmierer zu
+erm&ouml;glichen, zu sehen, wie das Programm Fehler macht. Entweder
+k&ouml;nnen Sie es ihm pers&ouml;nlich zeigen oder ihm sorgf&auml;ltige
+und genaue Informationen geben, wie er es dazu bringt, den Fehler zu
+machen. Wenn er das schafft, so wird er versuchen weitere
+Informationen zu sammeln, bis er die Ursache kennt. Wenn er das nicht
+schafft, so muss er sie bitten die Informationen f&uuml;r ihn zu
+sammeln. 
+</P>
+<P>Versuchen
+Sie genau auseinander zu halten, was die tats&auml;chlichen
+Vorkommnisse waren (&#132;Ich war am Rechner und dies und das
+passierte.&#147;) und was Ihre Interpretationen und Spekulationen
+sind (&#132;Ich <em>denke</em> es k&ouml;nnte an
+Folgendem liegen ...&#147;). Wenn Sie es nicht w&uuml;nschen, so
+brauchen Sie Ihre Spekulationen nicht mitzuteilen, aber bitte
+beschreiben Sie alle tats&auml;chlichen Vorkommnisse. 
+</P>
+<P>Wenn
+Sie einen Fehler melden, dann weil Sie ihn repariert haben wollen. Es
+macht keinen Sinn, den Programmierer zu verfluchen oder absichtlich
+m&ouml;glichst wenig hilfreich zu sein: Es mag der Fehler des
+Programmierers sein, dass Sie ein Problem haben und Sie &auml;rgern
+sich m&ouml;glicherweise vollkommen zu Recht &uuml;ber ihn, aber der
+Fehler wird schneller behoben werden, indem Sie ihm dadurch helfen,
+dass Sie ihm alle Informationen geben, die er braucht. &Uuml;brigens:
+Wenn es sich um freie Software handelt, haben Sie sie diese aufgrund
+der Nettigkeit des Autors bekommen. Wenn zu viele Leute sich ihm
+gegen&uuml;ber ungehobelt auff&uuml;hren, l&auml;sst diese Nettigkeit
+vielleicht nach. 
+</P>
+
+<a name="respect"><h3>&#132;Es geht nicht.&#147;</h3></a>
+<P>Gehen
+Sie davon aus, dass der Programmierer kein Volltrottel ist: Wenn das
+Programm &uuml;berhaupt nicht funktionieren w&uuml;rde, so w&auml;re
+es ihm aufgefallen. Da das nicht der Fall ist, wird es bei ihm wohl
+gehen. Also tun Sie etwas anders oder die Arbeitsumgebung bei Ihnen
+ist anders. Er braucht Information; diese Information zur Verf&uuml;gung
+zu stellen ist der Zweck eines Fehlerberichts. Mehr Information ist
+immer besser als weniger. 
+</P>
+<P>Von
+vielen Programmen, insbesondere von freien, gibt es eine
+ver&ouml;ffentlichte Liste der bekannten Fehler. Wenn Sie solch eine
+Liste finden k&ouml;nnen, so sollten Sie sie lesen um festzustellen
+ob der von Ihnen gefundenen Fehler darauf schon vorkommt. Wenn er
+schon bekannt ist, so ist er es wahrscheinlich nicht wert, dass Sie
+ihn wieder berichten,. Wenn Sie aber meinen, Sie haben mehr
+Informationen als in der Fehlerliste schon vorhanden, w&auml;re es
+vielleicht g&uuml;nstig, den Programmierer trotzdem zu
+benachrichtigen. Er kann den Fehler m&ouml;glicherweise eher beheben,
+wenn Sie ihm Informationen geben, die er noch nicht hatte.</P>
+<P>Diese
+Anleitung beschreibt einige Richtlinien. Keine von ihnen ist eine
+eiserne Regel. Verschiedene Programmierer haben verschiedene
+Vorlieben wie man Fehler berichten soll. Wenn das Programm seine
+eigenen Richtlinien hierf&uuml;r mitbringt, so lesen Sie sie diese
+und wenn sie dem widersprechen, was hier steht, richten Sie sich nach
+den Richtlinien die Sie mit dem Programms erhielten!</P>
+<P>Wenn
+Sie keinen Fehler berichten sondern nur um Hilfe zur
+Programmbedienung bitten, sollten Sie sagen, wo Sie schon &uuml;berall
+nach einer Antwort gesucht haben. (&#132;Ich habe Kapitel 4
+durchgelesen und den Abschnitt 5.2, konnte aber nichts finden, was
+darauf hindeutet ob das m&ouml;glich ist oder nicht.&#147;) Dadurch
+erfahren die Programmierer, wo die Anwender die Antwort auf ihre
+Fragen erwarten und sie k&ouml;nnen die Dokumentation besser
+gestalten. 
+</P>
+
+<a name="showme"><h3>&#132;Zeigen Sie es mir.&#147;</h3></a>
+<P>Eine
+der besten Methoden einen Fehler zu berichten ist, ihn dem
+Programmierer zu zeigen. Zitieren Sie ihn zu Ihrem Rechner, starten
+Sie das Programm und zeigen Sie, was schief ging. Lassen Sie ihn den
+Start ihres Rechners beobachten, wie Sie das Programm bedienen, was
+Sie genau tun und wie das Programm darauf reagiert. 
+</P>
+<P>Programmierer
+kennen ihre Software wie ihre Westentaschen. Sie wissen, welche Teile
+am vertrauensw&uuml;rdigsten sind und welche am wahrscheinlichsten
+aussetzen. Sie wissen intuitiv, wonach sie Ausschau zu halten haben.
+Schon lange vor dem Zeitpunkt, zu dem das Programm offensichtlichen
+Unfug macht, ist ihnen vielleicht ein subtiler Fehler aufgefallen,
+der einen wertvollen Hinweis liefert. Sie k&ouml;nnen alles, was der
+Rechner w&auml;hrend des Testlaufs macht, beobachten und diese
+wichtigen Details selbst herausfinden. 
+</P>
+<P>Vielleicht
+reicht das aber noch nicht. M&ouml;glicherweise wollen sie mehr
+Informationen und bitten Sie, ihnen das Ganze noch einmal
+vorzuf&uuml;hren. Oder Sie wollen von Ihnen, dass Sie ihnen dabei
+zusehen und Anleitung geben, so dass sie selbst den Fehler erzeugen
+k&ouml;nnen, so oft sie das wollen. Vielleicht versuchen sie den
+genauen Ablauf einige Mal zu &auml;ndern, um zu sehen, ob das Problem
+nur ein einem speziellen Fall von vielen &auml;hnlichen auftritt.
+Wenn Sie Pech haben, belegen sie vielleicht ihren Computer einige
+Stunden mit Beschlag, um mit Hilfe spezieller Entwicklerwerkzeuge dem
+Problem <em>richtig</em> zu Leibe zu r&uuml;cken.
+Aber das Wichtigste ist, dass die Programmierer es sehen, wenn der
+Computer Unsinn macht. Sobald sie das Problem sehen, k&ouml;nnen sie
+von diesem Anhaltspunkt aus meist daran arbeiten es zu beheben. 
+</P>
+
+<a name="showmehow"><h3>&#132;Zeigen Sie mir, wie ich es mir selbst zeigen kann.&#147;</h3></a>
+<P>Wir
+haben das Zeitalter des Internets und der weltweiten Kommunikation.
+Heutzutage kann ich meine Software mit einem Knopfdruck nach Russland
+schicken und der Empf&auml;nger kann mir genauso leicht seine
+Kommentare senden. Wenn er aber ein Problem mit meinem Programm hat
+kann ich mich <em>nicht</em> vor seinen Rechner
+stellen, w&auml;hrend der Fehler passiert. &#132;Zeigen Sie es mir&#147;
+ist eine gute Devise, wenn das geht, aber oft geht es nicht. 
+</P>
+<P>Wenn
+sie einen Fehlerbericht f&uuml;r einen Programmierer verfassen, der
+nicht anwesend sein kann, so versuchen Sie es ihm zu erm&ouml;glichen,
+den Fehler <em>nachzuvollziehen</em>. Ihr Ziel ist,
+dass der Programmierer seine Kopie des Programms laufen l&auml;sst,
+die selben Dinge macht, wie Sie und es bei ihm auf die selbe Weise
+schief geht. Wenn er das Problem vor seinen eigenen Augen sieht, kann
+er sich dessen annehmen. 
+</P>
+<P>Teilen
+Sie alles, was sie tun, ganz exakt mit. Wenn es ein Programm mit
+einer graphischen Benutzeroberfl&auml;che ist, teilen Sie mit, welche
+Kn&ouml;pfe Sie gedr&uuml;ckt haben und in welcher Reihenfolge. Wenn
+Sie einen Befehl eingegeben haben, sagen Sie, was Sie genau getippt
+haben. Wenn m&ouml;glich erstellen Sie ein genaues Skript aller
+Dinge, die Sie getan haben und wie der Computer darauf reagierte.</P>
+<P>Geben
+Sie den Programmierern alle Informationen, die Sie haben. Wenn das
+Programm aus einer Datei liest, m&uuml;ssen Sie wahrscheinlich eine
+Kopie der Datei zur Verf&uuml;gung stellen. Wenn das Programm in
+einem Netzwerk auf einen anderen Computer zugreift so k&ouml;nnen Sie
+zumindest sagen, welche Art von Computer das ist und &#150; falls Sie
+es wissen &#150; welche Programme darauf laufen. 
+</P>
+
+<a name="describe"><h3>&#132;Bei mir geht's. Wo ist das Problem?&#148;</h3></a>
+<P>Wenn
+Sie den Programmierern eine lange Liste Ihrer Eingaben und der
+Ausgaben des Rechners geben, aber bei deren Computer alles
+funktioniert, so haben Sie noch nicht genug Informationen zur
+Verf&uuml;gung gestellt. Vielleicht tritt das Problem nicht bei jedem
+Rechner auf. Deren System und das Ihre unterscheiden sich vielleicht
+teilweise. M&ouml;glicherweise haben Sie die Funktionsweise des
+Programms missverstanden und sie sehen alle dieselbe Anzeige, nur
+sind Sie der Auffassung, dass sie falsch ist und die Programmierer
+wissen, dass es stimmt. 
+</P>
+<P>Beschreiben
+Sie also auch genau, was geschah. Sagen Sie ihnen, was Sie sehen.
+Sagen Sie ihnen, warum Sie das, was Sie sehen f&uuml;r falsch halten,
+besser noch beschreiben Sie genau, was sie eigentlich zu sehen
+erwarteten. Wenn sie einfach sagen &#132;und das hat nicht
+funktioniert&#148;, haben Sie eine wichtige Information ausgelassen.</P>
+<P>Wenn
+Fehlermeldungen erscheinen, so sagen Sie den Programmierern genau und
+detailliert, welche das waren. Diese Meldungen <em>sind</em>
+wichtig! Zu diesem Zeitpunkt versuchen die Programmierer noch gar
+nicht den Fehler zu beheben, sondern nur herauszufinden, was der
+Fehler eigentlich ist. Sie m&uuml;ssen erfahren, was falsch lief und
+diese Meldungen sind der beste Versuch des Rechners, Ihnen das
+mitzuteilen. Schreiben Sie die Fehler auf, wenn Sie sich sonst nicht
+daran erinnern k&ouml;nnen, aber es macht keinen Sinn einen Fehler zu
+berichten, wenn Sie nicht sagen k&ouml;nnen, wie die Fehlermeldung
+lautete. 
+</P>
+<P>Insbesondere,
+wenn die Fehlermeldung eine Nummer ausgibt, geben Sie diese Nummer an
+den Programmierer <em>weiter</em>. Nur dass Sie in
+ihr keinen Sinn erkennen k&ouml;nnen, hei&szlig;t nicht, dass sie
+keinen Sinn macht. Nummern enthalten alle Arten wichtiger
+Informationen die ein Programmierer verstehen kann, und es ist
+wahrscheinlich, dass sie wichtige Hinweise enthalten. Fehlermeldungen
+haben Nummern, weil der Computer zu verwirrt ist, den Fehler in
+Worten zu berichten, aber er versucht das Beste zu tun, um Ihnen
+irgendwie diese Information zu vermitteln. 
+</P>
+<P>Zu
+diesem Zeitpunkt ist Programmieren im Wesentlichen Detektivarbeit.
+Die Programmierer wissen nicht, was passierte und sie kommen nicht
+nahe genug an das Problem heran, um es selbst zu beobachten, also
+suchen Sie nach Hinweisen, die sie auf die richtige Spuren f&uuml;hren
+k&ouml;nnen. Fehlermeldungen, unverst&auml;ndliche
+Aneinanderreihungen von Nummern und auch unerwartetes Stocken des
+Programms sind alles Fingerabdr&uuml;cke am Tatort des Verbrechens.
+Bewahren Sie sie auf! 
+</P>
+<P>Wenn
+Sie Unix verwenden, hat das Programm m&ouml;glicherweise einen Core
+Dump erzeugt. Core Dumps sind eine besonders n&uuml;tzliche Quelle
+von Hinweisen, also werfen Sie sie nicht weg. Andererseits m&ouml;gen
+es die meisten Programmierer nicht, wenn sie ohne Vorwarnung riesige
+Core Dateien geschickt bekommen, also fragen Sie bitte, bevor Sie sie
+jemandem zusenden. Au&szlig;erdem sollten Sie wissen, dass die Core
+Datei eine komplette Aufzeichnung des Stands des Programms enth&auml;lt:
+Alle m&ouml;glichen &#132;Geheimnisse&#148; befinden sich in der Core
+Datei (m&ouml;glicherweise hat das Programm gerade eine pers&ouml;nliche
+Nachricht transportiert oder vertrauliche Daten bearbeitet). 
+</P>
+
+<a name="antelope"><h3>&#132;Dann habe ich noch versucht&#148;</h3></a>
+<P>Es
+gibt eine Menge Dinge, die Sie tun k&ouml;nnen, wenn eine Fehler oder
+eigent&uuml;mliches Verhalten auftritt. Etliche dieser Dinge
+verschlimmern das Problem. Eine Schulfreundin l&ouml;schte
+versehentlich all ihre Word Dokumente und bevor sie einen Experten
+rief, versuchte sie Word neu zu installieren und dann f&uuml;hrte sie
+Defrag aus. Nichts davon war hilfreich dabei, ihre Dateien
+wiederzubeleben und sie sortierte damit ihre Festplatte so um, dass
+kein Undelete Programm auf der Welt mehr in der Lage gewesen w&auml;re
+irgendetwas zu retten. H&auml;tte sie nichts getan, so h&auml;tte sie
+eine Chance gehabt. 
+</P>
+<P>Anwender
+reagieren wie ein in die Ecke gedr&auml;ngter G&auml;nserich. Mit dem
+R&uuml;cken zur Wand und dem sicheren Tod ins Auge blickend greift er
+wie wildgeworden an, weil etwas zu tun besser sein muss, als nichts
+zu tun. Das ist keine gute angepasste Reaktion auf die Art von
+Problemen, die Computer verursachen. 
+</P>
+<P>Anstatt
+wie ein G&auml;nserich sollten Sie sich wie eine Antilope verhalten.
+Wenn eine Antilope etwas Unerwartetem, Furchteinfl&ouml;&szlig;endem
+gegen&uuml;bersteht, so r&uuml;hrt sie sich nicht vom Fleck. Sie
+bleibt vollkommen unbeweglich und versucht keine Aufmerksamkeit auf
+sich zu ziehen, w&auml;hrend sie nachdenkt, was zu tun wohl das Beste
+sei. (Wenn Antilopen telefonische Produktunterst&uuml;tzung h&auml;tten,
+w&uuml;rden sie zu diesem Zeitpunkt telefonieren.) Dann, sobald sie
+sich entschieden hat, was das Sicherste ist, tut sie es. 
+</P>
+<P>Wenn
+etwas schief l&auml;uft, h&ouml;ren Sie sofort auf <em>irgendetwas</em>
+zu tun. Fassen Sie &uuml;berhaupt keine Taste mehr an. Schauen Sie
+sich die Bildschirmausgabe an, suchen Sie nach allem, was
+au&szlig;ergew&ouml;hnlich aussieht und merken Sie es sich oder
+schreiben Sie es auf. Dann k&ouml;nnen Sie m&ouml;glicherweise
+vorsichtig dazu &uuml;bergehen, &#132;OK&#148; oder &#132;Abbrechen&#148;
+zu dr&uuml;cken, was immer Ihnen am Sichersten erscheint. Versuchen
+Sie, dieses Verhalten in Fleisch und Blut &uuml;bergehen zu lassen &#150;
+wenn der Computer etwas Unerwartetes tut, r&uuml;hren Sie sich nicht.
+
+</P>
+<P>Wenn
+Sie es schaffen, sich aus der misslichen Lage zu befreien, sei es
+durch Schlie&szlig;en des Programms oder durch Neustart Ihres
+Computers, w&auml;re es eine gute Sache zu versuchen, den Fehler
+nochmals auftreten zu lassen. Programmierer m&ouml;gen Probleme die
+sie &ouml;fter als einmal erzeugen k&ouml;nnen. Gl&uuml;ckliche
+Programmierer beheben Fehler schneller und effektiver. 
+</P>
+
+<a name="symptoms"><h3>&#132;Vermutlich
+ist die Polarisierung der Tachyonenmodulation falsch&#148;</h3></a>
+<P>Es
+ist nicht so, dass nur Nicht-Programmierer schlechte Fehlerberichte
+schreiben. Einige der f&uuml;rchterlichsten Fehlerberichte die ich je
+gesehen habe kamen von Programmierern und noch dazu von guten
+Programmierern. 
+</P>
+<P>Ich
+hatte einen Kollegen, der h&auml;ufig Fehler in seinem Code fand und
+sie zu reparieren versuchte. Wenn er auf einen Fehler stie&szlig;,
+den er nicht beheben konnte, rief er mich zu Hilfe. &#132;Was
+funktioniert nicht?&#148;, fragte ich. Er antwortete indem er mir
+seine augenblickliche Meinung schilderte, was das Problem verursacht
+habe.</P>
+<P>Das
+funktionierte wunderbar, wenn seine augenblickliche Meinung richtig
+war. Er hatte dann schon die halbe Arbeit getan und wir waren in der
+Lage es gemeinsam zu Ende zu bringen. Es war effizient und n&uuml;tzlich.</P>
+<P>Aber
+oft lag er auch falsch. Wir versuchten dann einige Zeit
+herauszufinden, warum ein bestimmter Teil des Programms falsche Daten
+erzeugte, nur um schlie&szlig;lich zu erkennen, dass er das gar nicht
+tat. Wir hatten eine halbe Stunde einwandfrei funktionierenden Code
+untersucht und das wirkliche Problem lag ganz wo anders.</P>
+<P>Ich
+bin mir sicher, bei einem Arzt w&uuml;rde er das nicht tun. &#132;Herr
+Doktor, ich denke ich habe Parkinson&#148;. Die Leute wissen, dass
+man sich einem Arzt gegen&uuml;ber nicht so verh&auml;lt. Man
+beschreibt die Symptome, die tats&auml;chlichen Beschwerden, das
+Unwohlsein und die Probleme, die Schmerzen und Ausschl&auml;ge und
+das Fieber und &uuml;berl&auml;sst dem Arzt die Diagnose, was dies
+verursacht. Andernfalls h&auml;lt Sie der Arzt f&uuml;r einen
+Hypochonder oder einem Spinner und das nicht zu Unrecht.</P>
+<P>Genauso
+verh&auml;lt es sich mit Programmierern. Es mag manchmal hilfreich
+sein, wenn Sie Ihre eigene Diagnose anf&uuml;hren, aber listen Sie
+immer auch die Symptome auf. Die Diagnose ist etwas Zus&auml;tzliches
+und keine Alternative zum Angeben der Symptome. Auch das Senden einer
+&Auml;nderung f&uuml;r den Code um das Problem zu beheben ist eine
+n&uuml;tzliche Zusatzangabe aber kein angemessener Ersatz f&uuml;r
+eine Fehlerbeschreibung. 
+</P>
+<P>Wenn
+die Programmierer um Zusatzinformationen bitten, so erfinden Sie
+diese nicht einfach! Einmal berichtete mir jemand einen Fehler und
+ich bat ihn ein Kommando auszuprobieren, von dem ich wusste, dass es
+nicht funktionieren w&uuml;rde. Ich wollte wissen, welche von zwei
+m&ouml;glichen Fehlermeldungen er erhalten w&uuml;rde. Dieses Wissen
+konnte mir einen wichtigen Hinweis geben. Aber er versuchte es nicht,
+sondern schrieb mir nur zur&uuml;ck, &#132;Nein, das wird nicht
+gehen.&#148; Ich brauchte etliche Zeit, bis ich ihn &uuml;berzeugt
+hatte, es wirklich auszuprobieren. 
+</P>
+<P>Es
+ist wunderbar, wenn Sie Ihre Intelligenz dazu benutzen wollen, dem
+Programmierer zu helfen. Auch wenn Ihre Schl&uuml;sse falsch sind,
+sollte der Programmierer dankbar sein, dass Sie wenigstens <em>versucht</em>
+haben, sein Leben zu erleichtern. Aber berichten Sie auch die
+Symptome, sonst k&ouml;nnte es passieren, dass Sie es stattdessen
+erschweren. 
+</P>
+
+<a name="intermittent"><h3>&#132;Ist
+ja lustig. Gerade eben hat&#146;s noch nicht funktioniert&#148;</h3></a>
+<P>Sie
+brauchen nur &#132;sporadisch auftretender Fehler&#148; zu sagen und
+schon bekommt jeder Programmierer ein langes Gesicht. Die Fehler, die
+durch eine einfache Folge von Handlungen hervorgerufen werden k&ouml;nnen,
+sind leicht. Der Programmierer kann die Handlungen unter gut
+kontrollierten Bedingungen wiederholen und im Detail beobachten, was
+geschieht. Zu viele Probleme sind aber nicht von dieser Art: Es gibt
+Programme, die einmal in der Woche ausfallen oder alle heiligen
+Zeiten oder nie, wenn man sie in Anwesenheit eines Programmierers
+verwendet, aber immer wenn ein Abgabetermin n&auml;her r&uuml;ckt.</P>
+<P>Die
+meisten sporadisch auftretenden Fehler treten nicht wirklich zuf&auml;llig
+auf. Meistens gibt es irgendwo ein verborgenes System. Manche treten
+auf, wenn dem Rechner der Speicher ausgeht, manche wenn ein anderes
+Programm im falschen Augenblick eine wichtige Datei ver&auml;ndert
+und manche nur in der ersten halben Stunde jeder vollen Stunde. (So
+etwas ist mir tats&auml;chlich begegnet.) 
+</P>
+<P>Wenn
+Sie den Fehler auftreten lassen k&ouml;nnen, der Programmierer aber
+nicht, so kann es darin liegen, dass ihre Rechner verschieden sind
+und diese Verschiedenheit das Problem verursacht. Ich hatte einmal
+ein Programm, dessen Fenster sich sich zu einem Fleck in der linken
+oberen Bildschirmecke zusammenzog, sich dort festbiss und einem <em>auf
+die Nerven ging</em>. Aber das tat es nur bei einer
+Bildschirmaufl&ouml;sung von 800x600; auf meinem 1024x768 Monitor
+funktionierte es problemlos.</P>
+<P>Die
+Programmierer werden alles wissen wollen, was Sie &uuml;ber das
+Problem herausfinden konnten. Versuchen Sie es etwa auch auf einem
+anderen Computer. Versuchen Sie es zwei- oder dreimal, um zu
+erfahren, wie oft es fehlschl&auml;gt. Wenn es schief geht, wenn Sie
+ernsthaft arbeiten, aber nicht, wenn Sie versuchen das Problem zu
+zeigen, k&ouml;nnte es sein, dass lange Laufzeit oder die Bearbeitung
+gro&szlig;er Dateien die Ursache ist. Versuchen Sie sich an so viel
+Details, dessen was Sie taten, als es fehlschlug, wie nur m&ouml;glich
+zu erinnern und wenn Sie meinen, darin eine Regelm&auml;&szlig;igkeit
+zu erkennen, so sagen Sie es bitte. Alles was sie sagen k&ouml;nnen,
+kann von Nutzen sein. Selbst wenn es nur eine ungef&auml;hre Ahnung
+ist (wie etwa &#132;es scheint eher abzust&uuml;rzen, wenn Emacs
+l&auml;uft&#148;). Es ist vielleicht kein direkter Hinweis auf das
+Problem, aber es k&ouml;nnte dem Programmierer helfen es
+nachzuvollziehen. 
+</P>
+<P>Vor
+allem werden die Programmierer sicher wissen wollen, ob sie es mit
+einem Fehler zu tun haben, der nur sporadisch oder nur auf bestimmten
+Computern auftritt. Sie werden viele Details &uuml;ber Ihren Computer
+wissen wollen, um herauszufinden, worin er sich von ihrem
+unterscheidet. Welche Details gew&uuml;nscht werden, wird stark vom
+verwendeten Programm abh&auml;ngen, aber auf jeden Fall sollten Sie
+die Versionsnummer angeben., sowohl die Versionsnummer des Programms,
+als auch die Versionsnummer des Betriebssystems und wahrscheinlich
+die Versionsnummern von allen anderen Programmen, die mit dem Problem
+zu tun haben. 
+</P>
+
+<a name="clarity"><h3>&#132;Dann
+bin ich in die Diskette reingegangen . . .&#148;</h3></a>
+<P>Sich
+klar auszudr&uuml;cken ist das Wichtigste bei einem Fehlerbericht.
+Wenn die Programmierer nicht wissen, was sie meinen, h&auml;tten Sie
+genauso gut gar nichts sagen k&ouml;nnen. 
+</P>
+<P>Ich
+bekomme Fehlerberichte von &uuml;berall her in der Welt. Viele
+Berichterstatter haben nicht Englisch als Muttersprache und von
+diesen entschuldigen sich viele f&uuml;r ihr schlechtes Englisch. Im
+Gro&szlig;en und Ganzen sind die Fehlerberichte mit den
+Entschuldigungen f&uuml;r schlechtes Englisch ziemlich klar und
+n&uuml;tzlich. Die meisten schwammigen Fehlerberichte kommen von
+Englischsprachigen, die annehmen, dass ich sie schon verstehen werde,
+auch wenn sie keinerlei Anstrengung unternehmen, klar und genau zu
+schreiben. 
+</P>
+<UL>
+	<LI><P><em>Seien
+	Sie genau</em>. Wenn man etwas auf zwei verscheiden
+	verschiedene Arten machen kann, dann sagen Sie, wie Sie es gemacht
+	haben. &#132;Ich habe es ge&ouml;ffnet&#148; kann hei&szlig;en &#132;Ich
+	habe auf &Ouml;ffnen geklickt&#148; oder &#132;Ich habe STRG-O
+	gedr&uuml;ckt&#148;. Sagen Sie, was Sie taten. Manchmals ist es
+	wichtig. 
+	</P>
+	<LI><P><em>Seien
+	Sie geschw&auml;tzig</em>. F&uuml;hren Sie lieber zu viel, als
+	zu wenig Informationen an. Wenn Sie zu viel sagen, kann der
+	Programmierer einiges unber&uuml;cksichtigt lassen. Wenn Sie zu
+	wenig sagen, muss er auf Sie zukommen und Sie ausfragen. Einmal
+	erhielt ich einen Fehlerbericht, bestehend aus einem einzigen Satz.
+	Jedes mal, wenn ich zur&uuml;ckfragte, bekam ich als Antwort einen
+	weiteren einzigen Satz. Ich brauchte mehrere Wochen, um so viel
+	Information zu sammeln, dass es mir weiterhalf, da die Information
+	nur satzweise eintr&ouml;pfelte. 
+	</P>
+	<LI><P><em>Seien
+	Sie vorsichtig mit Pronomen</em>. Benutzen Sie nicht Worte wie
+	&#132;es&#148; oder &#132;das Fenster&#148;, wenn es nicht klar ist,
+	was gemeint ist. Betrachten Sie folgendes Beispiel: &#132;Ich
+	startete die FooApp Anwendung. Sie brachte in einem Fenster eine
+	Warnung. Ich versuchte sie zu schlie&szlig;en und sie st&uuml;rzte
+	ab.&#148; Es ist nicht klar, was der Anwender zu schlie&szlig;en
+	versuchte. Versuchte er die Warnung zu schlie&szlig;en oder die
+	ganze FooApp Anwendung? Das macht einen Unterschied. Stattdessen
+	k&ouml;nnte man schreiben &#132;Ich startete die FooApp Anwendung,
+	welche eine Warnung in einem Fenster brachte. Ich versuchte die
+	Warnung zu schlie&szlig;en und die FooApp Anwendung st&uuml;rzte
+	ab.&#148; Das ist l&auml;nger und enth&auml;lt Wiederholungen aber
+	auch klarer und nicht so leicht misszuverstehen. 
+	</P>
+	<LI><P><em>Lesen
+	Sie, was Sie schreiben</em>. Lesen Sie sich den Bericht selbst
+	vor und beurteilen Sie, ob es f&uuml;r <em>Sie</em>
+	klar ist. Wenn Sie eine Liste von Handlungen erstellt haben, die das
+	Fehlverhalten heraufbeschw&ouml;ren, so gehen Sie sie einmal selbst
+	durch, um herauszufinden, ob Sie nicht einen Schritt vergessen
+	haben. 
+	</P>
+</UL>
+<a name="summary"><h3>Zusammenfassung</h3></P></a>
+<UL>
+	<LI><P>Das
+	Hauptziel eines Fehlerberichts ist, es, den Programmierern, den
+	Fehler mit den eigenen Augen sehen zu lassen. Wenn sie nicht da sind
+	und das nicht geht, so sollten Sie genaue Anweisungen geben, wie sie
+	den Fehler hervorrufen k&ouml;nnen.</P>
+	<LI><P>Falls
+	das nicht klappt und die Programmierer den Fehler <em>nicht</em>
+	nachvollziehen k&ouml;nnen, ist das zweite Ziel, genau zu
+	beschreiben, was schief ging Beschreiben Sie jedes Detail.
+	Beschreiben Sie, was Sie sahen und auch, was Sie zu sehen
+	erwarteten. Schreiben Sie die Fehlermeldungen auf, <em>insbesondere</em>
+	dann, wenn sie Nummern enthalten. 
+	</P>
+	<LI><P>Wenn
+	Ihr Computer etwas Unerwartetes tut, tun Sie <em>nichts</em>.
+	Tun Sie &uuml;berhaupt nichts, bis Sie ruhig sind und tun Sie
+	nichts, was Sie f&uuml;r gef&auml;hrlich halten.</P>
+	<LI><P>Versuchen
+	Sie ruhig, das Problem selbst zu diagnostizieren, wenn Sie das f&uuml;r
+	m&ouml;glich halten, aber Sie sollten trotzdem auch immer die
+	Symptome des Ausfalls berichten.</P>
+	<LI><P>Geben
+	Sie weitere Informationen heraus, wenn die Programmierer danach
+	fragen. Wenn sie sie nicht brauchen w&uuml;rden, w&uuml;rden sie
+	nicht fragen. Sie f&uuml;hren sich nicht absichtlich komisch auf.
+	Halten Sie Versionsnummern bereit, weil sie wahrscheinlich gebraucht
+	werden. 
+	</P>
+	<LI><P>Schreiben
+	Sie klar. Sagen Sie, was Sie meinen und stellen Sie sicher, dass es
+	nicht falsch verstanden werden kann. 
+	</P>
+	<LI><P>Und
+	vor allem, <em>seien Sie genau</em>. Programmierer
+	m&ouml;gen Genauigkeit. 
+	</P>
+</UL>
+<hr>
+<P><em>Warnhinweis:</em>
+Ich habe nie einen G&auml;nserich oder eine Antilope beobachtet.
+Meine zoologischen Ausf&uuml;hrungen sind m&ouml;glicherweise nicht
+korrekt. 
+</P>
+<P><em>$Id: bugs-de.html 9171 2011-05-10 17:39:06Z simon $</em> 
+</P>
+<P>Copyright
+&copy; 1999 Simon Tatham. <BR>Bei diesem Dokument handelt es sich um
+<A HREF="http://www.opencontent.org/">OpenContent</A>.
+<BR>Sie k&ouml;nnen
+diesen Text unter der <A HREF="http://www.opencontent.org/opl.shtml">OpenContent
+Lizenz</A> kopieren und verteilen.
+<BR>Bitte senden Sie Kommentare
+und Kritik zu dieser Anleitung in Englisch an
+<a href="mailto:&#97;&#110;&#97;&#107;&#105;&#110;&#64;&#112;&#111;&#98;&#111;&#120;&#46;&#99;&#111;&#109;">&#97;&#110;&#97;&#107;&#105;&#110;&#64;&#112;&#111;&#98;&#111;&#120;&#46;&#99;&#111;&#109;</a>.
+<BR>Verantworlich f&uuml; die &Uuml;bersetzung ins Deutsche
+<A HREF="mailto:Gerald_Huber@r.maus.de">Gerald_Huber@r.maus.de</a>
+</P>
+</BODY>
+</HTML>
